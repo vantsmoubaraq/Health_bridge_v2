@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Registration Form</title>
+    <link rel="stylesheet" href="../static/styles/patient_form.css" /> 
+    
+</head>
+<body>
+	<header class="head">
+        <nav>
+            <img
+                src="https://assets.mockflow.com/app/wireframepro/company/C06cebf9edc514714a50cc24918f5b156/projects/MYQX0R3SPob/images/thumbnails/Me6d09e02eed3c78df2c2c0e04e0817c21678708408116"
+                alt="photo"
+                class="left-side-img3"
+            />
+            <h1><a class="title" href="/">HealthBridge</a></h1>
+            <ul>
+                <li><a class="patients" href="/">Patients</a></li>
+                <li><a class="pharmacy" href="pharmacy">Pharmacy</a></li>
+                <li><a class="appointments" href="/appointments">Appointments</a></li>
+            </ul>
+        </nav>
+    </header>
+	<h2>Patient Edit Form</h2>
+	<form method="post" id="myForm">
+		<fieldset>
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="name" value="{{ patient.name }}" required><br><br>
+			<label for="dob">Date of Birth:</label>
+			<input type="date" id="dob" name="dob" required><br><br>
+            <label for="age">Age:</label>
+			<script src="../static/scripts/age_calculator.js"></script>
+            <input type="number" id="age" name="age" value="{{ patient.age }}"><br><br>
+			<label for="gender">Gender:</label>
+			<!--<input type="text" id="gender" name="gender" value="{{ patient.gender }}" required><br><br>-->
+            <select id="gender" name="gender" value="" required>
+				<option value="{{ patient.gender }}">Select Gender</option>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+			</select><br><br>
+			<label for="address">Address:</label>
+			<textarea id="address" name="address"  required>{{ patient.address }}</textarea><br><br>
+			<label for="contact">Contact:</label>
+			<input type="tel" id="contact" name="contact" value="{% if patient.contact is none %}{{ none }}{% else %}{{ patient.contact }}{% endif %}" required><br><br>
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" value="{{ patient.email }}" required><br><br>
+		</fieldset>
+		<fieldset>
+			<label for="hospitalizations">Clinical Notes:</label>
+            <textarea id="notes" name="clinical_notes"  required>{{ patient.clinical_notes }}</textarea><br><br>
+		</fieldset>
+		
+		<button type="submit" id="btn" value="Submit">Submit</button>
+	</form>
+</body>
+<script  type="text/javascript" src="../static/scripts/edit_patient.js">
+	/*const submitButton = document.getElementById('btn');
+	submitButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    const form = document.getElementById('myForm');
+    const formData = new FormData(form);
+
+	const data = {};
+  		for (const [key, value] of formData.entries()) {
+    	data[key] = value;
+ 	 }
+
+    const requestOptions = {
+        method: 'PUT',
+        body: JSON.stringify(data),
+		headers: {'Content-Type': 'application/json'}
+    };
+	
+
+    fetch('http://127.0.0.1:5001/api/v1/patients', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+			console.log(data);
+			const id = data.id;
+			window.location.href = `/single/${id}`;
+		})
+        .catch(error => console.error(error));
+});*/
+
+/*
+  fetch('/data')
+    .then(response => response.json())
+    .then(data => {
+      const id = data.id;
+      window.location.href = `/data/${id}`;
+    })
+    .catch(error => console.error(error));
+}*/
+
+</script>
+</html>
