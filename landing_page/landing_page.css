@@ -1,399 +1,351 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #fffefe;
-  }
-  
-  
-
-  /*styles for the header include borders*/
-  header {
-    background-color: #fff;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #000;
-  }
-  span {
-    color: green;
-  }
-  
-  nav {
-    display: flex;
-    align-items: center;
-  }
-  
-  nav a {
-    color: #000;
-    text-decoration: none;
-    font-size: 16px;
-    margin-left: 20px;
-  }
-  
-  nav a:hover {
-    text-decoration: underline;
-  }
-  
-  form {
-    display: flex;
-    align-items: center;
-  }
-  
-  
-  
-button[type="button"] {
-    background-color: #4dd119;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 16px;
-    font-size: 16px;
-    margin-right: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-  }
-
-  button[type="button"] {
-    color: #424141;
-  }
-  
-  button[type="button"]:hover {
-    background-color: #f2f2f2;
-    color: rgb(5, 121, 5);
-    border: 2px solid rgb(5, 121, 5);
-  }
-  
-  main {
-    max-width: 1000px;
-    margin: 100px auto 50px auto;
-  }
-  
-  h1 {
-    font-size: 48px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  h2 {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  p {
-    font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-  
-  
-  
-  img {
-    max-width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .card {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    align-items: flex-start;
-    height: 0%;
-    width: 100%;
-    box-shadow: 0 1px 1px rgba(199, 198, 198, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  }
-
-  .card1 {
-    display: flex;
-    flex-direction: column;
-    opacity: 80%;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    background-color: #10a831;
-    margin-top: 250px;
-    margin-left: -200px;
-    height: 250px;
-    width: 700px;
-    padding: 20px 20px;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    
-  }
-
-  #pow {
-    font-size: 75px;
-    margin-top: 10px;
-  }
-  
-  #seco { 
-    font-size: 45px;
-    margin-top: -30px;
-    color: #f9fcf9;
-  }
-
-
-
-  .car {
-    margin-left: -220px;
-    background-color: #fefeff;
-    align-items: flex-start;
-    height: 1500px;
-    width: 1430px;
-    margin-top: 60px;
-    box-shadow: 0 1px 1px rgba(199, 198, 198, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  }
-
-  .cont {
-    display: flex;
-    align-items: center;
-    background-image: url("patients\ \(2\).png");
-    background-size: contain;
-    background-size: cover;
-    background-position: 300px 10px;
-    background-repeat: no-repeat;
-    background-size: 900px;
-    height: 550px;
-    width: 1200px;
-    margin-top: -80px;
-  }
-  
-  #img {
-    height: 400px;
-    width: 800px;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-    justify-content: space-around;
-    margin-left: 20px;
-    margin-top: 20px;
-  }
-  .logoi {
-    width: 430px;
-    height: 220px;
-    margin-top: 40px;
-    margin-left: -100px;
-   
-    position: absolute;
-  }
- 
-  .img1 {
-   
-    height: 400px;
-    width: 800px;
-    display: block;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-    margin-left: 200px;
-    margin-right: 20px;
-    margin-top: 500px;
-  }
-
-  .img2 {
-    
-    height: 400px;
-    width: 850px;
-    display: block;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-    margin-left: 20px;
-    margin-top: 1000px;
-  }
-
-  #abt {
-    height: 950px;
-    width: 700px;
-    display: block;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-    margin-left: -200px;
-    position: absolute;
-    margin-top: 150px;
-  }
-  
-  .card-info {
-    flex: 5%;
-    padding: 20px;
-    margin-left: 50px;
-    margin-top: 90px;
-  }
-  .card-info1 {
-    flex: 5%;
-    padding: 20px;
-    margin-left: 80px;
-    margin-top: 600px;
-  }
-
-  .card-info2 {
-    flex: 5%;
-    padding: 20px;
-    margin-left: 20px;
-    margin-top: 1050px;
-  }
-  
-  .card-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .card-description {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-
-  #about {
-    margin-top: 100px;
-    margin-left: 600px;
-  }
-
-  .aboutus-more {
-    border: 1px solid #10a831;
-    border-radius: 25px;
-    color: #0ec51d;
-    display: inline-block;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0;
-    padding: 7px 20px;
-    text-transform: uppercase;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+:root {
+  --primary-color: #00f35d;
 }
 
-/* Style for the contributors section */
-#contributors {
-  margin-top: 50px;
-  padding: 50px 10px;
-  background-color: #fdfbfb;
-  align-items: center;
-  
+body {
+  background: #F2F2F2;
+  margin: 0;
+  font-family: "Poppins";
 }
 
-
-/* Style for the contributors list */
-#contributors ul {
-  list-style: none;
+.navbar {
+  background: white;
+  padding: 1em;
+}
+.navbar .logo {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  font-size: 1.2em;
+}
+.navbar .logo span {
+  color: var(--primary-color);
+}
+.navbar nav {
+  display: none;
+}
+.navbar .container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  place-content: space-between;
+}
+.navbar .mobile-menu {
+  cursor: pointer;
 }
 
-/* Style for the GitHub icon */
-#contributors li a i {
-  font-size: 2rem;
-  color: #000;
-  transition: color 0.3s ease-in-out;
+a {
+  color: #444444;
 }
 
-/* Hover effect for the GitHub icon */
-#contributors li a:hover i {
-  color: #fff;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
+section {
+  padding: 5em 2em;
+}
 
-/* Style for each contributor item */
-#contributors li {
-  width: 300px;
-  margin: 20px;
+.hero {
   text-align: center;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease-in-out;
-  
 }
 
-/* Hover effect for each contributor item */
-#contributors li:hover {
-  transform: translateY(-5px);
+.left-col .subhead {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: gray;
+  letter-spacing: 0.3em;
+}
+.left-col h1 {
+  font-size: 2.5em;
+  line-height: 1.3em;
+  margin-top: 0.2em;
+}
+.left-col .primary-cta {
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  padding: 0.6em 1.3em;
+  font-size: 1.4em;
+  border-radius: 5em;
+  font-weight: bold;
+  display: inline-block;
+}
+.left-col .watch-video-cta {
+  display: block;
+  margin-top: 1em;
+}
+.left-col .watch-video-cta img {
+  margin-right: 0.5em;
 }
 
-/* Style for the contributor image */
-#contributors li img {
+.hero-img {
+  width: 70%;
+  margin-top: 3em;
+  background-color: #00f35d;
+}
+
+section.features-section {
+  background: #20272E;
+  color: white;
+}
+
+ul.features-list {
+  margin: 0;
+  padding-left: 0.1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+}
+ul.features-list li {
+  font-size: 1.1em;
+  margin-bottom: 1em;
+  margin-left: 2em;
+  position: relative;
+}
+ul.features-list li:before {
+  content: "";
+  left: -2em;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url("../images/bullet.svg");
+  background-size: contain;
+  margin-right: 0.5em;
+}
+
+.features-section img {
+  display: none;
+}
+
+.testimonials-section {
+  background: var(--primary-color);
+  color: white;
+}
+.testimonials-section li {
+  background: rgb(11, 243, 3);
+  text-align: center;
+  padding: 2em 1em;
+  width: 80%;
+  margin: 0 auto 5em auto;
+  border-radius: 1em;
+}
+.testimonials-section li img {
+  width: 5em;
+  height: 5em;
+  border: 5px solid #00d659;
+  border-radius: 50%;
+  margin-top: -4.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+label {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+input, textarea {
   width: 100%;
-  height: auto;
-  border-radius: 10px 10px 0 0;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border-radius: 0.3em;
+  border: 1px solid gray;
+  box-sizing: border-box;
 }
 
-/* Style for the contributor name */
-#contributors li h3 {
-  margin-top: 20px;
-  font-size: 1.5rem;
+input[type=submit] {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  border: none;
+  margin-bottom: 5em;
+  border-radius: 5em;
+  display: inline-block;
+  padding: 0.8em 2em;
+  width: unset;
+  cursor: pointer;
 }
 
-/* Style for the contributor role */
-#contributors li p:nth-child(3) {
-  margin-top: 10px;
+iframe {
+  width: 100%;
+  height: 300px;
+}
+
+nav.menu-btn {
+  display: block;
+}
+
+nav {
+  position: fixed;
+  z-index: 999;
+  width: 66%;
+  right: 0;
+  top: 0;
+  background: #20272E;
+  height: 100vh;
+  padding: 1em;
+}
+nav ul.primary-nav {
+  margin-top: 5em;
+}
+nav li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 0.5em;
+  font-size: 1.3em;
+  text-align: right;
+}
+nav li a:hover {
   font-weight: bold;
 }
 
-/* Style for the contributor contributions */
-#contributors li p:last-child {
-  margin-top: 10px;
+.mobile-menu-exit {
+  float: right;
+  margin: 0.5em;
+  cursor: pointer;
 }
 
-/* Style for the GitHub profile link */
-#contributors li a {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 1px 2px;
-  background-color: #fdfbfb;
-  color: #fff;
-  border-radius: 20px;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.gitlog {
-  width: 30px;
-  margin-right: 10px;
-}
-
-/* Hover effect for the GitHub profile link */
-#contributors li a:hover {
-  background-color: #fff;
-  color: #000;
-}
-
-  footer {
-    background-color: #fcfbfb;
-    padding: 20px;
+@media only screen and (min-width: 768px) {
+  .mobile-menu, .mobile-menu-exit {
+    display: none;
+  }
+  .navbar .container {
+    display: grid;
+    grid-template-columns: 180px auto;
+    justify-content: unset;
+  }
+  .navbar nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    background: none;
+    position: unset;
+    height: auto;
+    width: 100%;
+    padding: 0;
   }
-  
-  footer p {
-    font-size: 16px;
-    margin-bottom: 10px;
+  .navbar nav ul {
+    display: flex;
   }
-  
-  footer a {
-    color: #4285f4;
-    text-decoration: none;
+  .navbar nav a {
+    color: black;
+    font-size: 1em;
+    padding: 0.1em 1em;
   }
-  
-  footer a:hover {
-    text-decoration: underline;
+  .navbar nav ul.primary-nav {
+    margin: 0;
   }
+  .navbar nav li.current a {
+    font-weight: bold;
+  }
+  .navbar nav li.go-premium-cta a {
+    color: var(--primary-color);
+    border: 3px solid var(--primary-color);
+    font-weight: bold;
+    border-radius: 5em;
+    margin-top: -0.2em;
+  }
+  .navbar nav li.go-premium-cta a:hover {
+    background: var(--primary-color);
+    color: white;
+  }
+}
+@media only screen and (min-width: 1080px) {
+  .container {
+    width: 1080px;
+    margin: 0 auto;
+  }
+  section {
+    padding: 10em 4em;
+  }
+  .hero .container {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .hero .container .left-col {
+    margin: 3em 3em 0 5em;
+  }
+  .hero .container .left-col h1 {
+    font-size: 3em;
+    width: 90%;
+  }
+  .hero-img {
+    width: 30%;
+    margin-right: 8em;
+  }
+  .hero-cta {
+    display: flex;
+  }
+  .primary-cta {
+    margin-right: 1em;
+  }
+  ul.features-list {
+    display: block;
+    margin-left: 5em;
+  }
+  ul.features-list li {
+    font-size: 1.4em;
+  }
+  ul.features-list li:before {
+    width: 30px;
+    height: 30px;
+  }
+  .features-section {
+    position: relative;
+  }
+  .features-section img {
+    display: block;
+    position: absolute;
+    right: 0;
+    width: 350px;
+    bottom: -2em;
+  }
+  .testimonials-section ul {
+    display: flex;
+  }
+  .testimonials-section ul li {
+    margin: 0 1em;
+  }
+  .contact-section {
+    position: relative;
+  }
+  .contact-section .container {
+    display: flex;
+  }
+  .contact-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+    height: 100%;
+  }
+  .contact-right iframe {
+    height: 100%;
+  }
+}
+@media only screen and (min-width: 1450px) {
+  .features-section:before {
+    content: "";
+    position: absolute;
+    width: 10%;
+    height: 20em;
+    background: var(--primary-color);
+    left: 0;
+    top: -4em;
+  }
+  .features-section:after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 20em;
+    background: url("../images/dots.svg") no-repeat;
+    left: 4.5em;
+    top: 2em;
+  }
+}
