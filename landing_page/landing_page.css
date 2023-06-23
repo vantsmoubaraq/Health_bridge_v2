@@ -123,7 +123,7 @@ ul.features-list li:before {
   color: white;
 }
 .testimonials-section li {
-  background: rgb(11, 243, 3);
+  background: #00f35d;
   text-align: center;
   padding: 2em 1em;
   width: 80%;
