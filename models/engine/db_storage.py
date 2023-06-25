@@ -105,3 +105,8 @@ class DB_Storage:
         """searchs against a query string"""
         results = self.__session.query(classes[cls]).filter(classes[cls].name.ilike(f'%{query}%')).all()
         return results
+    
+    def search_one(self, cls, **kwargs):
+        """search for one object based on string"""
+        result = self.__session.query(classes[cls]).filter_by(**kwargs).first()
+        return result

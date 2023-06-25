@@ -54,4 +54,3 @@ def patient_drug(patient_id, drug_id=None):
         patient_drugs.remove(drug)
         storage.save()
         return jsonify({})
-
