@@ -2,7 +2,7 @@
 
 """Module handles all default RESTful API actions Drug class"""
 
-from flask import Flask, render_template, jsonify, make_response, request
+from flask import Flask, render_template, jsonify, make_response, request, abort
 from models import storage
 from models.drugs import Drug
 from api.v1.views import ui

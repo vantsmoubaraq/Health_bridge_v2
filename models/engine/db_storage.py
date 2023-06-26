@@ -8,10 +8,11 @@ from models.base_model import BaseModel
 from models.patients import Patient, patient_drug
 from models.drugs import Drug
 from models.payments import Payment
+from models.users import User
 from models.base_model import Base
 from os import getenv
 
-classes = {"Patient": Patient, "Drug": Drug, "Payment": Payment, "patient_drug": patient_drug}
+classes = {"Patient": Patient, "Drug": Drug, "Payment": Payment, "patient_drug": patient_drug, "User": User}
 
 
 class DB_Storage:
@@ -29,8 +30,8 @@ class DB_Storage:
 
         self.__engine = create_engine("{}://{}:{}@localhost:3306/{}".
                                       format(dialct, user, password, database))
-    #if DB_Storage.environment == "test":
-     #   Base.metadata.drop_all(self.__engine)
+        #if environment == "test":
+        #Base.metadata.drop_all(self.__engine)
 
     def create(self, obj):
         """Stage object"""
@@ -104,3 +105,8 @@ class DB_Storage:
         """searchs against a query string"""
         results = self.__session.query(classes[cls]).filter(classes[cls].name.ilike(f'%{query}%')).all()
         return results
+    
+    def search_one(self, cls, **kwargs):
+        """search for one object based on string"""
+        result = self.__session.query(classes[cls]).filter_by(**kwargs).first()
+        return result
