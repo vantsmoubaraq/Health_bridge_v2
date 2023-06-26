@@ -6,10 +6,11 @@ from models.base_model import BaseModel
 from models.patients import Patient
 from models.drugs import Drug
 from models.payments import Payment
+from models.users import User
 from datetime import datetime
 import json
 
-classes = {"Patient": Patient, "Drug": Drug, "Payment": Payment}
+classes = {"Patient": Patient, "Drug": Drug, "Payment": Payment, "User": User}
 
 
 class FileStorage:

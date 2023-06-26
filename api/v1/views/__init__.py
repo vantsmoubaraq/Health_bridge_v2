@@ -9,3 +9,4 @@ from api.v1.views.patients import *
 from api.v1.views.drugs import *
 from api.v1.views.payments import *
 from api.v1.views.patients_drugs import *
+from api.v1.views.users import *
