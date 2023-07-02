@@ -193,6 +193,33 @@ def telemedicine():
                 event.update(invitee[event["uri"]])
     return render_template("appointments.html", all_events=all_events)
 
+@app.route("/lab_tests", strict_slashes=False)
+def lab_tests():
+    """Displays available laboratory tests"""
+    # Adding logic to fetch and display laboratory tests
+    return render_template("lab_tests.html")
+
+
+@app.route("/radiology", strict_slashes=False)
+def radiology():
+    """Displays radiology services"""
+    # Adding logic to fetch and display radiology services
+    return render_template("radiology.html")
+
+
+@app.route("/physiotherapy", strict_slashes=False)
+def physiotherapy():
+    """Displays physiotherapy services"""
+    # Adding logic to fetch and display physiotherapy services
+    return render_template("physiotherapy.html")
+
+
+@app.route("/vaccinations", strict_slashes=False)
+def vaccinations():
+    """Displays available vaccinations"""
+    # Adding logic to fetch and display vaccinations
+    return render_template("vaccinations.html")
+
 def events(response):
     """returns all events in last 7 days"""
     event_details = []
