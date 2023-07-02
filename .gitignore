@@ -1,0 +1,6 @@
+# Ignore all files with a certain extension
+*.pyc
+
+# Ignore all files in a specific directory
+my_env/
+
