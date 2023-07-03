@@ -8,12 +8,17 @@ from models.drugs import Drug
 from models.payments import Payment
 from models.users import User
 from models.engine.file_storage import FileStorage
+from models.prescriptions import Prescription
+from models.prescribed_drugs import Prescribed_drug
 from models.engine.db_storage import DB_Storage
+from models.deliverables import Deliverable
+from models.invoices import Invoice
 import cmd
 import models
 from colorama import init, Fore, Back, Style
 
-classes = {"Patient": Patient, "Drug": Drug, "Payment": Payment, "User": User}
+classes = {"Patient": Patient, "Drug": Drug, "Payment": Payment, "User": User,
+           "Prescription": Prescription, "Invoice": Invoice, "Prescribed_drug": Prescribed_drug, "Deliverable": Deliverable}
 
 
 class Console(cmd.Cmd):

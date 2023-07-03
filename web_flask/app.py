@@ -2,22 +2,133 @@
 
 """Module populates all views"""
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for, flash, abort
 from models.patients import Patient
 import models
 from models.base_model import BaseModel
 from models.drugs import Drug
+from models.users import User
 import random
 from models.payments import Payment
 import requests
 from datetime import datetime, timedelta, timezone
 import pytz
+import secrets
+from functools import wraps
+from api.v1.auth import Auth
+from werkzeug.security import generate_password_hash
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 app = Flask(__name__)
 app.debug = True
+app.secret_key = secrets.token_hex(32)
+Auth = Auth()
 
+login_manager = LoginManager(app)
+login_manager.init_app(app)
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect(url_for('login'))
+
+@login_manager.user_loader
+def load_user(user_id):
+    # Load the user from the database based on user_id
+    # Return the user object or None if not found
+    return models.storage.search_one("User", id=user_id)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        # Validate the user's credentials (e.g., check email and password against the database)
+        user = models.storage.search_one("User", email=email)
+        if user and user.check_password(password):
+            # Login the user
+            login_user(user)
+            return render_template("patients_page.html")
+        else:
+            flash('Invalid email or password')
+    else:
+        return render_template('login_signup.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        # Retrieve form data
+        name = request.form.get('name')
+        age = request.form.get('age')
+        gender = request.form.get('gender')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        contact = request.form.get('contact')
+        role = request.form.get('role')
+
+        # Create a new User instance
+        new_user = User(
+            name=name,
+            age=age,
+            gender=gender,
+            email=email,
+            password=generate_password_hash(password),
+            contact=contact,
+            role=role
+        )
+        user = models.storage.search_one("User", email=email)
+        if user:
+            abort(403)
+        new_user.save()
+        # Save the new user to the database
+        # Replace this with your database logic to save the user
+        # Example: db.session.add(new_user); db.session.commit()
+
+        # Log in the user after successful signup
+        login_user(new_user)
+
+        # Redirect the user to the home page or any desired page
+        return render_template("patients_page.html")
+
+    return render_template('login_signup.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    # Logout the user
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route('/profile')
+@login_required
+def profile():
+    # Access the current user using `current_user` and retrieve the necessary profile information
+    user = current_user
+    return render_template('profile.html', user=user)
+
+"""
+@app.route('/password-update', methods=['GET', 'POST'])
+@login_required
+def password_update():
+    if request.method == 'POST':
+        current_password = request.form['current_password']
+        new_password = request.form['new_password']
+
+        # Validate the user's current password and update the password in the database
+        user = current_user
+        if user.check_password(current_password):
+            user.set_password(new_password)
+            db.session.commit()
+            flash('Password updated successfully')
+            return redirect(url_for('profile'))
+        else:
+            flash('Invalid current password')
+
+    return render_template('password_update.html')
+"""
 
 @app.route("/", strict_slashes=False)
+@login_required
 def all_patients():
     """Populates all patients view"""
     if models.storage_env == "db":
@@ -38,6 +149,7 @@ def all_patients():
 
 
 @app.route("/pharmacy", strict_slashes=False)
+@login_required
 def pharmacy():
     """Implements pharmacy view"""
     if models.storage_env == "db":
@@ -55,6 +167,7 @@ def pharmacy():
     return render_template("pharmacy_page.html", drugs=drugs, storage_env=models.storage_env)
 
 @app.route("/single/<string:patient_id>", strict_slashes=False)
+@login_required
 def single_patient(patient_id):
     """Handles single patient_view"""
     image_urls = ["../static/images/p1.jpeg", "../static/images/p2.jpeg", "../static/images/p3.jpeg", "../static/images/p4.jpeg", "../static/images/p5.jpeg", "../static/images/p6.jpeg", "../static/images/p7.jpeg", "../static/images/p8.jpeg"]
@@ -194,10 +307,11 @@ def telemedicine():
     return render_template("appointments.html", all_events=all_events)
 
 
-@app.route("/login")
-def login():
+@app.route("/log", strict_slashes=False)
+def log():
     """renders login page"""
     return render_template("login_signup.html")
+
 
 def events(response):
     """returns all events in last 7 days"""
