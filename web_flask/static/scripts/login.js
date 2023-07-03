@@ -14,5 +14,17 @@ document.getElementById('signin').addEventListener('click', function(e) {
     fetch('http://127.0.0.1:5000/login', {
       method: 'POST',
       body: formData
+    }).then(function(response) {
+      if (response.ok) {
+        // Successful login, redirect to home page
+        window.location.href = "/";
+      } else {
+        // Failed login, display error message
+        alert('Log in failed. Please check your credentials.');
+      }
     })
+    .catch(function(error) {
+      console.error('Error:', error);
+      alert('An error occurred during login.');
+    });
   });

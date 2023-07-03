@@ -1,12 +1,7 @@
 #!/usr/bin/python3
 
 """Module populates all views"""
-
-<<<<<<< HEAD
 from flask import Flask, render_template, request, session, redirect, url_for, flash, abort
-=======
-from flask import Flask, render_template, request, redirect
->>>>>>> e254409f2cad9de1b4a62d5ac20fcb5d86e98368
 from models.patients import Patient
 import models
 from models.base_model import BaseModel
@@ -53,7 +48,7 @@ def login():
         if user and user.check_password(password):
             # Login the user
             login_user(user)
-            return render_template("patients_page.html")
+            return "hello_world"
         else:
             flash('Invalid email or password')
     else:
@@ -312,15 +307,13 @@ def telemedicine():
     return render_template("appointments.html", all_events=all_events)
 
 
-<<<<<<< HEAD
 @app.route("/log", strict_slashes=False)
 def log():
     """renders login page"""
     return render_template("login_signup.html")
 
-=======
 @app.route("/signup")
-def login():
+def sign_up():
     """renders login page"""
     return render_template("login_signup.html")
 
@@ -371,7 +364,6 @@ def search_service():
     services = models.storage.search(query, "Service")
     return render_template("service_search.html", services=services)
 
->>>>>>> e254409f2cad9de1b4a62d5ac20fcb5d86e98368
 
 def events(response):
     """returns all events in last 7 days"""

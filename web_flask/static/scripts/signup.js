@@ -21,7 +21,7 @@ document.getElementById('sign_up').addEventListener('click', function(e) {
     .then(function(response) {
       if (response.ok) {
         // Successful login, redirect to home page
-        window.location.href("/");
+        window.location.href = "/";
       } else {
         // Failed login, display error message
         alert('Sign Up failed. Please check your credentials.');
@@ -29,6 +29,6 @@ document.getElementById('sign_up').addEventListener('click', function(e) {
     })
     .catch(function(error) {
       console.error('Error:', error);
-      alert('An error occurred during login.');
+      alert('An error occurred during Sign Up.');
     });
   });
