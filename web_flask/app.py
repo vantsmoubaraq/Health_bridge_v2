@@ -193,6 +193,11 @@ def telemedicine():
                 event.update(invitee[event["uri"]])
     return render_template("appointments.html", all_events=all_events)
 
+@app.route("/signup")
+def login():
+    """renders login page"""
+    return render_template("login_signup.html")
+
 def events(response):
     """returns all events in last 7 days"""
     event_details = []
