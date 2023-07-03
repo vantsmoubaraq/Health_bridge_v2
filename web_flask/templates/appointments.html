@@ -1,7 +1,8 @@
-{% extends 'header.html' %}
-
-  {% block content %}
-  
+<html>
+<head>
+    <link rel="stylesheet" href="../static/styles/single_patient.css" />
+    <meta charset="UTF-8">
+    <title>Prescription List</title>
     <style>
       /* Table style */
       table {
@@ -86,11 +87,9 @@ option {
 }
 
 .main2{
-  display: inline-block;
-  width: 100%;
-  padding: 20px;
-  margin-top: 20px;
-
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 input[type="text"] {
@@ -105,20 +104,12 @@ input[type="text"] {
   }
 
   .btn1{
-    margin-top: 0px;
-    background-color: #20b140;
-    border-radius: 5px;
-    color: white;
-    padding: 8px 20px;
-    border: none;
-    background-color: hsl(120, 64%, 35%);
-    font-family: "Montserrat", sans-serif;
-    font-weight: 200;
+    margin-top: -5px;
   }
 
   .btn2{
-    float: right;
-    margin-top: -20px;
+    margin-left: 15px;
+    margin-top: -5px;
     background-color: #20b140;
     border-radius: 5px;
     color: white;
@@ -141,6 +132,7 @@ input[type="text"] {
   }
 
   h2{
+    margin-left: -30%;
     display: inline-block;
   }
 
@@ -149,62 +141,31 @@ input[type="text"] {
     color: hsl(120, 64%, 35%);
   }
 
-  .btn1:hover,
   .btn2:hover {
     background-color: hsl(180, 7%, 97%);
     color: rgb(5, 121, 5);
     border: 2px solid rgb(5, 121, 5);
 
 }
-
-/* Media query for smaller screens */
-@media screen and (max-width: 768px) {
-  body {
-    overflow : scroll;
-  }
-
-  table {
-    font-size: 1em;
-    width: auto;
-    min-width: unset;
-    overflow: scroll;
-  }
-
-  table th,
-  table td {
-    padding: 8px 10px;
-  }
-
-  .main2 {
-    display: inline-block;
-    padding: 10px;
-  }
-
-  .btn1,
-  .btn2 {
-    margin-top: 10px;
-  }
-
-  #btn3,
-  #btn4 {
-    display: block;
-    margin: 10px auto;
-    text-align: center;
-  }
-}
-
-
-/* Media query for larger screens */
-@media screen and (min-width: 1200px) {
-  table {
-    min-width: 1200px;
-  }
-}
-
   
-</style>
-  
-
+    </style>
+  </head>
+<body>
+    <header class="head">
+        <nav >
+            <img
+                src="https://assets.mockflow.com/app/wireframepro/company/C06cebf9edc514714a50cc24918f5b156/projects/MYQX0R3SPob/images/thumbnails/Me6d09e02eed3c78df2c2c0e04e0817c21678708408116"
+                alt="photo"
+                class="left-side-img3"
+            />
+            <h1 class="title">HealthBridge</h1>
+            <ul>
+                <li><a class="patients" href="/">Patients</a></li>
+                <li><a class="pharmacy" href="/pharmacy">Pharmacy</a></li>
+                <li><a class="appointments" href="#Appointments">Appointments</a></li>
+            </ul>
+        </nav>
+    </header>
     <section class="main2">
 	    <h2>Appointments</h2>
         <a id="btn4" href="https://calendly.com/healthbridge" target="_blank"><button class="btn1">ADD</button></a>
@@ -280,7 +241,7 @@ input[type="text"] {
         </tr>-->
       </tbody>
     </table>
-  
+  </body>
   <script type="text/javascript" src="../static/scripts/search_prescriptions.js"></script>
   <script type="text/javascript" src="../static/scripts/delete_prescription.js"></script>
-  {% endblock %}
+</html>
