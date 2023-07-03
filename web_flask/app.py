@@ -194,6 +194,12 @@ def telemedicine():
                 event.update(invitee[event["uri"]])
     return render_template("appointments.html", all_events=all_events)
 
+
+@app.route("/signup")
+def login():
+    """renders login page"""
+    return render_template("login_signup.html")
+
 @app.route("/services", strict_slashes=False)
 def services():
     """Displays all services"""
@@ -240,6 +246,7 @@ def search_service():
     query = request.args.get("q")
     services = models.storage.search(query, "Service")
     return render_template("service_search.html", services=services)
+
 
 def events(response):
     """returns all events in last 7 days"""
