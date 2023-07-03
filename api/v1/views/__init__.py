@@ -13,3 +13,4 @@ from api.v1.views.users import *
 from api.v1.views.prescriptions import *
 from api.v1.views.invoices import *
 from api.v1.views.prescribed_drugs import *
+from api.v1.views.services import *

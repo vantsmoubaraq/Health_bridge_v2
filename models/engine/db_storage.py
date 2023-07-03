@@ -9,6 +9,7 @@ from models.patients import Patient, patient_drug
 from models.prescriptions import Prescription
 from models.drugs import Drug
 from models.payments import Payment
+from models.services import Service
 from models.users import User
 from models.base_model import Base
 from os import getenv
@@ -16,7 +17,7 @@ from models.invoices import Invoice
 from models.prescribed_drugs import Prescribed_drug
 from models.deliverables import Deliverable
 
-classes = {"Patient": Patient, "Drug": Drug, "Payment": Payment, "patient_drug": patient_drug, "User": User,
+classes = {"Patient": Patient, "Service": Service, "Drug": Drug, "Payment": Payment, "patient_drug": patient_drug, "User": User,
             "Prescription": Prescription, "Invoice": Invoice, "Prescribed_drug": Prescribed_drug, "Deliverable": Deliverable}
 
 

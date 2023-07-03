@@ -2,7 +2,11 @@
 
 """Module populates all views"""
 
+<<<<<<< HEAD
 from flask import Flask, render_template, request, session, redirect, url_for, flash, abort
+=======
+from flask import Flask, render_template, request, redirect
+>>>>>>> e254409f2cad9de1b4a62d5ac20fcb5d86e98368
 from models.patients import Patient
 import models
 from models.base_model import BaseModel
@@ -10,6 +14,7 @@ from models.drugs import Drug
 from models.users import User
 import random
 from models.payments import Payment
+from models.services import Service
 import requests
 from datetime import datetime, timedelta, timezone
 import pytz
@@ -307,11 +312,66 @@ def telemedicine():
     return render_template("appointments.html", all_events=all_events)
 
 
+<<<<<<< HEAD
 @app.route("/log", strict_slashes=False)
 def log():
     """renders login page"""
     return render_template("login_signup.html")
 
+=======
+@app.route("/signup")
+def login():
+    """renders login page"""
+    return render_template("login_signup.html")
+
+@app.route("/services", strict_slashes=False)
+def services():
+    """Displays all services"""
+    if models.storage_env == "db":
+        models.storage.save()
+    else:
+        models.storage.reload()
+    services = sorted(list(models.storage.all("Service").values()), key=lambda x: x.name)
+    return render_template("services.html", services=services, storage_env=models.storage_env)
+
+@app.route("/edit_service/<string:service_id>", strict_slashes=False)
+def edit_service(service_id):
+    """Displays service edit form"""
+    service = models.storage.get("Service", service_id)
+    return render_template("service_edit_form.html", service=service)
+
+@app.route("/delete_service/<string:service_id>", strict_slashes=False)
+def delete_service(service_id):
+    """Deletes a service"""
+    service = models.storage.get("Service", service_id)
+    if service:
+        models.storage.delete(service)
+        models.storage.save()
+    return redirect("/services")
+
+@app.route("/create_service", strict_slashes=False)
+def create_service():
+    """Displays service creation form"""
+    return render_template("service_create_form.html")
+
+@app.route("/service/<string:service_id>", strict_slashes=False)
+def single_service(service_id):
+    """Displays a single service"""
+    if models.storage_env == "db":
+        models.storage.save()
+    else:
+        models.storage.reload()
+    service = models.storage.get("Service", service_id)
+    return render_template("single_service.html", service=service)
+
+@app.route("/search_services", strict_slashes=False)
+def search_service():
+    """Displays drugs based on a query string"""
+    query = request.args.get("q")
+    services = models.storage.search(query, "Service")
+    return render_template("service_search.html", services=services)
+
+>>>>>>> e254409f2cad9de1b4a62d5ac20fcb5d86e98368
 
 def events(response):
     """returns all events in last 7 days"""
