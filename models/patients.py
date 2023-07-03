@@ -33,6 +33,9 @@ class Patient(BaseModel, Base):
         payments = relationship("Payment", backref="patient", cascade='all, delete')
         drugs = relationship("Drug", secondary="patients_drugs",
                              backref="patient_drugs", viewonly=False)
+        prescriptions = relationship("Prescription", back_populates="patient", overlaps="prescriptions")
+        deliverables = relationship("Deliverable", back_populates="patient", overlaps="deliverables")
+        invoices = relationship("Invoice", back_populates="patient", overlaps="invoices")
 
     if models.storage_env != "db":
         @property

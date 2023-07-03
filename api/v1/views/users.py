@@ -4,7 +4,7 @@
 Module implements user endpoints
 """
 
-from flask import jsonify, abort, request, make_response, redirect
+from flask import jsonify, abort, request, make_response, redirect, session
 from models.users import User
 from models import storage
 from api.v1.views import ui
@@ -47,7 +47,8 @@ def log_in() -> str:
         abort(401)
     
     session_id = Auth.create_session(email)
-    response = jsonify({"email": email, "message": "logged in"})
+    session["session_id"] = session_id
+    response = jsonify({"email": email, "message": "logged in", "session_id": session_id})
     response.set_cookie("session_id", session_id)
     return response
     
