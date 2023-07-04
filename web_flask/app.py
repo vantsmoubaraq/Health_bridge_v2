@@ -10,11 +10,13 @@ from models.users import User
 import random
 from models.payments import Payment
 from models.services import Service
+from models.messages import Message
 import requests
 from datetime import datetime, timedelta, timezone
 import pytz
 import secrets
 from functools import wraps
+from flask_socketio import SocketIO, send
 from api.v1.auth import Auth
 from werkzeug.security import generate_password_hash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
@@ -22,6 +24,8 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 app = Flask(__name__)
 app.debug = True
 app.secret_key = secrets.token_hex(32)
+app.config['SECRET_KEY'] = secrets.token_hex(32)
+socketio = SocketIO(app, cors_allowed_origins="*")
 Auth = Auth()
 
 login_manager = LoginManager(app)
@@ -126,6 +130,34 @@ def password_update():
 
     return render_template('password_update.html')
 """
+
+@app.route('/chat')
+@login_required
+def index():
+    name = current_user.name
+    return render_template('messaging.html', name=name)
+
+@socketio.on('message')
+def handle_message(data):
+    print('Received message: ' + data)
+    if data != "I\'m connected!":
+        #new_message = Message(content=data, sender=name)
+        #new_message.save()
+        send(data, broadcast=True)
+    #socketio.emit('message', data, broadcast=True)
+
+"""@socketio.on('connect')
+def on_connect():
+    all_messages = list(models.storage.all("Message").values())
+    current_messages = []
+    for message in all_messages:
+        if message.sender == current_user.name:
+            current_messages.append(message)
+
+    # Convert messages to a suitable format if needed
+    # Emit the message history to the connected client
+    send(current_messages)"""
+
 
 @app.route("/", strict_slashes=False)
 @login_required
@@ -281,6 +313,7 @@ def search_prescriptions(patient_id):
     return render_template("prescription_search.html", drugs=drugs)
 
 @app.route("/appointments", strict_slashes=False)
+@login_required
 def telemedicine():
     """Display appointments from calendly api"""
     access_token = "eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNjgwMDA2NjMzLCJqdGkiOiI5ZWM0YTU2Yy02MGY3LTRhZTYtYTdhNy1hNThiODQyNzM0ODEiLCJ1c2VyX3V1aWQiOiJhMzk0ZjgxMS1mNjdlLTQyYTMtODcyYS1iYzM4MzU4NzM1YzAifQ.4Iz5ISUjOf0oy5J6HjHTU1kv-sTG2ff2A9w_R6-aGGjcDvNx5qj3BxxRu8WC-055bXTBsAA5QkQAp0uOXNDlmg"
@@ -400,6 +433,6 @@ def invitees(all_events, headers):
     return(invitee_details)
 
 
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
+    socketio.run(app, host='0.0.0.0', port="5000")
