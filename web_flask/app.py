@@ -429,6 +429,7 @@ def delete_service(service_id):
     return redirect("/services")
 
 @app.route("/create_service", strict_slashes=False)
+@login_required
 def create_service():
     """Displays service creation form"""
     return render_template("service_create_form.html")
@@ -449,6 +450,17 @@ def search_service():
     query = request.args.get("q")
     services = models.storage.search(query, "Service")
     return render_template("service_search.html", services=services)
+
+@app.route("/prescriptions_page/<string:patient_id>", strict_slashes=False)
+@login_required
+def prescribe(patient_id):
+    if not patient_id:
+        abort(404)
+    patient = models.storage.get("Patient", patient_id)
+    if not patient:
+        abort(404)
+    user = current_user
+    return render_template("patients_prescriptions.html", patient=patient, user=user)
 
 
 def events(response):

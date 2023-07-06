@@ -29,7 +29,7 @@
     </header>
 
     <section class="main2">
-        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}">{{ patient.name }} /</a></h3><h4>Prescriptions</h4>
+        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><h4>Prescriptions</h4>
         <button id="action">DISCARD</button>
         
         <a href="" id="edit"><button class="btn1">SAVE</button></a>
@@ -49,7 +49,7 @@
                     <h7 id="space">Pharmacy</h7>
                 </div>
                 <div class="middle1">
-			{{ patient.name }}
+			 {{ patient.name }}
 		    <br>
             <select id="dropdown">
                 <option value="option1">HealthBridge</option>
@@ -63,7 +63,7 @@
                     <h7 id="space">Prescription Date</h7><br>
                 </div>
                 <div class="right">
-                    {{ patient.address }}<br>
+                    {{ user.name }}<br>
                     <input type="text" id="dateInput" placeholder="Select a date and time" readonly>
                     <div id="calendarDropdown" class="dropdown-content"></div>
 		    
@@ -224,7 +224,7 @@
                 </tr>
               </thead>
               <tbody>
-                {% for event in all_events %}
+                 for event in all_events
                 <tr>
                   <td></td>
                   <td></td>
@@ -237,7 +237,7 @@
                   <td></td>
                   <td></td>
                 </tr>
-                {% endfor %}
+                 endfor 
                 </tbody>
             </table>
         </section>
