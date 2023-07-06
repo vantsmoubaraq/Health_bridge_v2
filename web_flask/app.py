@@ -291,7 +291,7 @@ def add_prescriptions(patient_id):
     patient = models.storage.get("Patient", patient_id)
     drugs = patient.drugs
     now = datetime.now().strftime('%Y-%m-%d  %H:%M:%S')
-    return render_template("prescriptions_view.html", patient=patient, drugs=drugs, now=now)
+    return render_template("patients_prescriptions.html", patient=patient, drugs=drugs, now=now)
 
 @app.route("/all_payments/<string:patient_id>", strict_slashes=False)
 def all_payments(patient_id):
