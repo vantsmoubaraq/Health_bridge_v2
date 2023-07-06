@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """Module populates all views"""
-from flask import Flask, render_template, request, session, redirect, url_for, flash, abort
+from flask import Flask, render_template, request, session, redirect, url_for, flash, abort, jsonify
 from models.patients import Patient
 import models
 from models.base_model import BaseModel
@@ -10,11 +10,15 @@ from models.users import User
 import random
 from models.payments import Payment
 from models.services import Service
+from models.messages import Message
+from flask_mail import Mail, Message
 import requests
 from datetime import datetime, timedelta, timezone
+from itsdangerous import URLSafeTimedSerializer
 import pytz
 import secrets
 from functools import wraps
+from flask_socketio import SocketIO, send
 from api.v1.auth import Auth
 from werkzeug.security import generate_password_hash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
@@ -22,10 +26,20 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 app = Flask(__name__)
 app.debug = True
 app.secret_key = secrets.token_hex(32)
+app.config['SECRET_KEY'] = secrets.token_hex(32)
+socketio = SocketIO(app, cors_allowed_origins="*")
 Auth = Auth()
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'vantsmoubaraq@gmail.com'
+app.config['MAIL_PASSWORD'] = 'okbovhcmqztoxeja'
+app.config['MAIL_DEFAULT_SENDER'] = 'vantsmoubaraq@gmail.com'
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
+serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+mail = Mail(app)
 
 @login_manager.unauthorized_handler
 def unauthorized():
@@ -40,6 +54,7 @@ def load_user(user_id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        models.storage.save()
         email = request.form['email']
         password = request.form['password']
 
@@ -48,9 +63,10 @@ def login():
         if user and user.check_password(password):
             # Login the user
             login_user(user)
-            return "hello_world"
+            return redirect(url_for('all_patients'))
         else:
             flash('Invalid email or password')
+            return redirect(url_for('login'))
     else:
         return render_template('login_signup.html')
 
@@ -106,7 +122,7 @@ def profile():
     user = current_user
     return render_template('profile.html', user=user)
 
-"""
+
 @app.route('/password-update', methods=['GET', 'POST'])
 @login_required
 def password_update():
@@ -117,15 +133,84 @@ def password_update():
         # Validate the user's current password and update the password in the database
         user = current_user
         if user.check_password(current_password):
-            user.set_password(new_password)
-            db.session.commit()
+            user.password = generate_password_hash(new_password)
+            user.save()
             flash('Password updated successfully')
             return redirect(url_for('profile'))
         else:
             flash('Invalid current password')
+    return render_template("update_password.html")
 
-    return render_template('password_update.html')
-"""
+# Generate a token
+def generate_token(user_id):
+    token = serializer.dumps(user_id)
+    return token
+
+#send reset email
+def send_password_reset_email(user, token):
+    reset_link = url_for('passwd', token=token, _external=True)
+    subject = 'Password Reset Request'
+    body = f'Hello {user.name}, To reset your password, please click the following link: {reset_link}'
+    email = Message(subject, recipients=[user.email], body=body)
+    mail.send(email)
+
+
+@app.route("/reset_password_token", methods=["GET", "POST"])
+def reset():
+    """Resets password"""
+    if request.method == "POST":
+        email = request.form["email"]
+        user = models.storage.search_one("User", email=email)
+        token = generate_token(user.id)
+        user.reset_token = token
+        user.save()
+        send_password_reset_email(user, token)
+        return render_template("forgot_passw.html")
+    else:
+        return render_template("forgot_passw.html")
+
+@app.route("/reset_password", methods=["GET", "POST"])
+def passwd():
+    """resets forgetten password"""
+    if request.method == 'POST':
+        token = request.args.get("token")
+        user = models.storage.search_one("User", reset_token=token)
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+        if new_password == confirm_password:
+            user.password = generate_password_hash(new_password)
+            user.save()
+        return jsonify({"password": new_password})
+    return render_template('reset_passw.html')
+   
+
+@app.route('/chat')
+@login_required
+def index():
+    name = current_user.name
+    return render_template('messaging.html', name=name)
+
+@socketio.on('message')
+def handle_message(data):
+    print('Received message: ' + data)
+    if data != "I\'m connected!":
+        #new_message = Message(content=data, sender=name)
+        #new_message.save()
+        send(data, broadcast=True)
+    #socketio.emit('message', data, broadcast=True)
+
+"""@socketio.on('connect')
+def on_connect():
+    all_messages = list(models.storage.all("Message").values())
+    current_messages = []
+    for message in all_messages:
+        if message.sender == current_user.name:
+            current_messages.append(message)
+
+    # Convert messages to a suitable format if needed
+    # Emit the message history to the connected client
+    send(current_messages)"""
+
 
 @app.route("/", strict_slashes=False)
 @login_required
@@ -281,6 +366,7 @@ def search_prescriptions(patient_id):
     return render_template("prescription_search.html", drugs=drugs)
 
 @app.route("/appointments", strict_slashes=False)
+@login_required
 def telemedicine():
     """Display appointments from calendly api"""
     access_token = "eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNjgwMDA2NjMzLCJqdGkiOiI5ZWM0YTU2Yy02MGY3LTRhZTYtYTdhNy1hNThiODQyNzM0ODEiLCJ1c2VyX3V1aWQiOiJhMzk0ZjgxMS1mNjdlLTQyYTMtODcyYS1iYzM4MzU4NzM1YzAifQ.4Iz5ISUjOf0oy5J6HjHTU1kv-sTG2ff2A9w_R6-aGGjcDvNx5qj3BxxRu8WC-055bXTBsAA5QkQAp0uOXNDlmg"
@@ -400,6 +486,6 @@ def invitees(all_events, headers):
     return(invitee_details)
 
 
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
+    socketio.run(app, host='0.0.0.0', port="5000")
