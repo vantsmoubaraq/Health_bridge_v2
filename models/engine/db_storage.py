@@ -117,3 +117,7 @@ class DB_Storage:
         """search for one object based on string"""
         result = self.__session.query(classes[cls]).filter_by(**kwargs).first()
         return result
+    
+    def rollback(self):
+        """rollback"""
+        self.__session.rollback()

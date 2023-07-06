@@ -35,13 +35,13 @@
         <section class="card">
             <h2 class="text-4xl mb-4 ml-28 mt-4" class="h1">Reset Password</h2>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2 flex ml-12" for="password">New Password</label>
-                <input class="shadow appearance-none w-80 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2 ml-12" id="password" type="password" placeholder="New Password">
+                <label class="block text-gray-700 text-sm font-bold mb-2 flex ml-12" for="password" >New Password</label>
+                <input class="shadow appearance-none w-80 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2 ml-12" id="password1" type="password" placeholder="New Password">
             </div>
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2 flex ml-12" for="password">Confirm Password</label>
-                <input class="shadow appearance-none w-80 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2 ml-12" id="password1" type="password" placeholder="Confirm Password">
+                <label class="block text-gray-700 text-sm font-bold mb-2 flex ml-12" for="password" >Confirm Password</label>
+                <input class="shadow appearance-none w-80 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-2 ml-12" id="password2" type="password" placeholder="Confirm Password">
             </div>
 
             <button class="bg-green-500 mt-4 mb-4 h-12 ml-12 border rounded" id="resetButton">Reset</button>
@@ -69,8 +69,28 @@
         const resetButton = document.getElementById('resetButton');
         const popup = document.getElementById('popup');
 
-        resetButton.addEventListener('click', () => {
+        resetButton.addEventListener('click', (e) => {
             popup.classList.remove('hidden');
+            e.preventDefault();
+            const new_password = document.getElementById("password1").value;
+            const confirm_password = document.getElementById("password2").value;
+            var formData = new FormData();
+            formData.append("new_password", new_password);
+            formData.append("confirm_password", confirm_password)
+            const searchParams = new URLSearchParams(window.location.search);
+            const token = searchParams.get('token');
+
+            // Make a POST request to the API endpoint
+            fetch(`http://127.0.0.1:5000/reset_password?token=${token}`, {
+            method: 'POST',
+            body: formData
+            }).then(response => response.json()).then(data => {
+            console.log('Response:', data);
+            // Handle the response data
+            }).catch(function(error) {
+            console.error('Error:', error);
+            alert('An error occurred during reset process.');
+            });
         });
 
         const mobileBtn = document.getElementById('mobile-cta');
