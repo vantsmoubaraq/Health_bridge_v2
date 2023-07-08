@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Single patient prescription Page</title>
+        <title>Customer Invoices</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../static/styles/prescriptions.css" />
@@ -35,18 +35,18 @@
         <a href="" id="edit"><button class="btn1">SAVE</button></a>
     </section>
     <div class="line">
-        <button class="btn"><a href="./customer_invoices.html">CONSULTANCY INVOICE</a></button>
-        <button class="btn"><a href="#">SEND TO PHARMACY</a></button> 
+        <button class="btn">VALIDATE</button>
+        <button class="btn"><a>TRANSFER</a></button> 
     </div>
 
     <main class="main">
         <section class="card">
-            <h3>Prescriptions</h3>
+            <h3>Draft Invoice</h3>
 
             <section class="des">
                 <div class="left">
-                    Patient Name<br>
-                    <h7 id="space">Pharmacy</h7>
+                    Related Patient<br>
+                    <h7 id="space">Payment Terms</h7>
                 </div>
                 <div class="middle1">
 			{{ patient.name }}
@@ -59,8 +59,8 @@
               
                 </div>
                 <div class="middle2">
-                    Physician<br>
-                    <h7 id="space">Prescription Date</h7><br>
+                    Salesperson<br>
+                    <h7 id="space">Invoice Date</h7><br>
                 </div>
                 <div class="right">
                     {{ patient.address }}<br>
@@ -71,7 +71,7 @@
             </section>
 
             <section class="main2">
-                <h2>Prescription Lines</h2>
+                <h2>Invoice Lines</h2>
                 <a id="btn3" href="#" target="_blank"><button class="btn2" id="addButton">Add an item</button></a>
 
                 <!-- Card Popup HTML -->
@@ -211,16 +211,14 @@
             <table>
               <thead>
                 <tr>
-                  <th>Medicines</th>
-                  <th>Indication</th>
-                    <th>Dose</th>
-                  <th>Dose Unit</th>
-                  <th>Form</th>
-                  <th>Frequency</th>
-                  <th>x</th>
-                  <th>Treatment duration</th>
-                  <th>Treatment period</th>
-                  <th>Comment</th>
+                  <th>Product</th>
+                  <th>Desription</th>
+                    <th>Account</th>
+                  <th>Quantity</th>
+                  <th>Unit of Measure</th>
+                  <th>Unit price</th>
+                  <th>Taxes</th>
+                  <th>Amount</th>
                 </tr>
               </thead>
               <tbody>
@@ -228,8 +226,6 @@
                 <tr>
                   <td></td>
                   <td></td>
-                    <td></td>
-                    <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -240,6 +236,17 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+            <section>
+                <div class="totals">
+                    Untaxed Amount: 
+                    <br>Tax: 
+                    <hr class="section-divider">
+                    Total: 
+                    <hr class="section-divider">
+                    Amount Due:  
+                </div>
+            </section>
         </section>
     </main>
 </body>
