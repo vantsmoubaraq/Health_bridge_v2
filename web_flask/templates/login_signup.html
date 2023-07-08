@@ -33,17 +33,17 @@
         <form>
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Enter your email">
+            <input id="email2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Enter your email">
           </div>
           <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Enter your password">
+            <input id="password2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Enter your password">
           </div>
           <div class="flex items-center justify-between">
-            <button class="bg-blue-500 hover:bg-white hover:text-green-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            <button id="signin" class="bg-blue-500 hover:bg-white hover:text-green-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
               Sign In
             </button>
-            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:bg-white hover:text-green-300 underline" href="#">
+            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:bg-white hover:text-green-300 underline" href="http://127.0.0.1:5000/reset_password_token">
               Forgot Password?
             </a>
           </div>
@@ -54,18 +54,22 @@
         <form>
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Enter your name">
+            <input id="name1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Enter your name">
           </div>
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Enter your email">
+            <input id="email1"class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Enter your email">
           </div>
           <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Enter your password">
+            <input id="password1"class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Enter your password">
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Gender</label>
+            <input id="gender1"class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="gender" type="gender" placeholder="Enter your Gender">
           </div>
           <div class="flex items-center justify-between">
-            <button class="bg-green-500 hover:bg-white hover:text-green-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            <button id="sign_up" class="bg-green-500 hover:bg-white hover:text-green-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
               Sign Up
             </button>
           </div>
@@ -89,6 +93,8 @@
       }
     }
   </script>
+  <script src="../static/scripts/login.js"></script>
+  <script src="../static/scripts/signup.js"></script>
 </body>
 
 </html>

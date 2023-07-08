@@ -160,6 +160,119 @@ ul {
     border: 2px solid rgb(5, 121, 5);
   }
 
+   /* Styling for the user profile section */
+   .prof {
+    float: right;
+    position: absolute;
+    margin-left: 90%;
+   }
+   .profile {
+    margin-left: -120px;
+    margin-top: 10px;
+    position: absolute;
+    padding: 0px;
+    border: 1px solid #ccc;
+    max-width: 350px;
+    background-color: #fffefe;
+    border-radius: 5px;
+  }
+
+  .profile h2 {
+    text-align: center;
+    margin-bottom: 2px;
+    margin-top: -5px;
+    color: #20b140;
+  }
+
+  .profile label {
+    display: block;
+    margin-bottom: 2px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .profile input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+
+  .profile span {
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 20px;
+  }
+
+
+  .profile button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  /* Styling for the user photo */
+  .user-photo {
+    
+    cursor: pointer;
+    
+  }
+
+  /* Styling for the edit mode */
+  .edit-mode .profile span {
+    display: none;
+  }
+
+  .edit-mode .profile input[type="text"] {
+    display: block;
+    background-color: #f5f5f5;
+  }
+
+  .edit-mode .profile .edit-buttons {
+    display: block;
+  }
+
+  .edit-mode .profile .edit-buttons button {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .btn {
+  background-color: #20b140;
+  border-radius: 5px;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  background-color: hsl(120, 64%, 35%);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  }
+
+  .btn1 {
+  background-color: #fa0202;
+  border-radius: 5px;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  }
+
+  .btn:hover {
+  background-color: hsl(180, 7%, 97%);
+  color: rgb(5, 121, 5);
+  border: 2px solid rgb(5, 121, 5);
+  }
+
+  .btn1:hover {
+  background-color: hsl(180, 7%, 97%);
+  color: rgb(240, 10, 10);
+  border: 2px solid rgb(248, 6, 6);
+  }
+
   @media screen and (max-width: 768px) {
     .card {
       width: 45%;

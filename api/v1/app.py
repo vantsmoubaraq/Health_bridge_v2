@@ -8,13 +8,14 @@ from flask_cors import CORS
 from models import storage
 from flasgger import Swagger
 from flasgger.utils import swag_from
-
+import secrets
 
 app = Flask(__name__)
 app.register_blueprint(ui)
 app.debug = True
 CORS(app)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.secret_key = secrets.token_hex(32)
 
 """
 @app.teardown_appcontext

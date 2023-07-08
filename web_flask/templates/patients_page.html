@@ -22,6 +22,50 @@
                 <li><a class="appointments" href="/appointments">Appointments</a></li>
             </ul>
         </nav>
+
+        <div class="prof" id="homepage">
+            <!-- User photo -->
+            <div style="text-align: center;">
+              <img src="../static/images/person_FILL0_wght400_GRAD0_opsz48.png" alt="User Photo" class="user-photo" onclick="showProfile()">
+            </div>
+        
+            <div id="profileSection" style="display: none;">
+              <div class="profile">
+                <h2>User Profile</h2>
+                <div>
+                  <label for="username">Username:</label>
+                  <span id="username"></span>
+                  <input type="text" id="usernameInput" style="display: none;">
+                </div>
+                <div>
+                  <label for="email">Email:</label>
+                  <span id="email"></span>
+                  <input type="text" id="emailInput" style="display: none;">
+                </div>
+                <div>
+                  <label for="name">Name:</label>
+                  <span id="name"></span>
+                  <input type="text" id="nameInput" style="display: none;">
+                </div>
+                <div>
+                  <label for="gender">Gender:</label>
+                  <span id="gender"></span>
+                  <input type="text" id="genderInput" style="display: none;">
+                </div>
+                <div>
+                  <label for="role">Role:</label>
+                  <span id="role"></span>
+                  <input type="text" id="roleInput" style="display: none;">
+                </div>
+                <div class="edit-buttons" style="display: none;">
+                  <button class="btn" type="button" id="saveButton">Save</button>
+                  <button class="btn" type="button" id="cancelButton">Cancel</button>
+                </div>
+                <button class="btn" id="editButton">Edit Profile</button>
+                <button class="btn1" id="logoutButton"><a href="http://127.0.0.1:5000/logout">Logout</a></button>
+              </div>
+            </div>
+          </div>
     </header> 
     <section class="main2">
         <h2>Patients</h2>
@@ -269,4 +313,5 @@
     </main>
 </body>
 <script type="text/javascript" src="../static/scripts/search.js"></script>
+<script type="text/javascript" src="../static/scripts/profile.js"></script>
 </html>
