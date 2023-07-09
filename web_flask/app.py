@@ -312,6 +312,18 @@ def display_prescription(prescription_id):
         drug.drug_name = actual_drug.name
     return render_template("prescription_display.html", prescription=prescription, patient=patient, now=now, user=user, prescribed_drugs=prescribed_drugs)
 
+@app.route("/invoices/<string:patient_id>", strict_slashes=False)
+def add_invoices(patient_id):
+    """Displays prescriptions for a patient"""
+    if models.storage_env == "db":
+        models.storage.save()
+    else:
+        models.storage.reload()
+    patient = models.storage.get("Patient", patient_id)
+    drugs = patient.drugs
+    now = datetime.now().strftime('%Y-%m-%d  %H:%M:%S')
+    return render_template("invoices.html", patient=patient, drugs=drugs, now=now)
+
 @app.route("/all_payments/<string:patient_id>", strict_slashes=False)
 def all_payments(patient_id):
     """Displays payments"""

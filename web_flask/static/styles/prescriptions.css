@@ -406,7 +406,10 @@ input {
     border: 2px solid rgb(5, 121, 5);
 
 }
-
+a {
+  text-decoration: none;
+  color: hsl(0, 0%, 100%);
+}
   .bread_crumb {
     text-decoration: none;
     font-size: 19.5px;
@@ -480,7 +483,10 @@ input {
     font-size: 20px;
   }
 
-
+.totals {
+  justify-content: flex-end;
+  float: right;
+}
   
   @media screen and (max-width: 768px) {
     .card {
