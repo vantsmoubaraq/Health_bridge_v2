@@ -14,10 +14,14 @@ from api.v1.views import ui
 def prescriptions(patient_id=None, prescription_id=None):
     """Methods handles all restful api operations"""
     if not patient_id and not prescription_id:
-        abort(404)
+        return jsonify({"message": "error"})
     if request.method == "POST":
+        patient = storage.get("Patient", patient_id)
+        if not patient:
+            return jsonify({"message": "error"})
         obj = Prescription(patient_id=patient_id)
         obj.save()
+        storage.save()
         return jsonify(obj.to_dict()), 200
     elif request.method == "GET":
         prescription = storage.get("Prescription", prescription_id)

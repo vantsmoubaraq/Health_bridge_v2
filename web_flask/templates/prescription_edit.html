@@ -155,36 +155,26 @@
                 </div>
             </section>
             <!--<h4>Prescription Records</h4>-->
-            <table>
+            <table id="table">
               <thead>
                 <tr>
-                  <th>Medicines</th>
-                  <th>Indication</th>
+                    <th>Medicines</th>
                     <th>Dose</th>
-                  <th>Dose Unit</th>
-                  <th>Form</th>
                   <th>Frequency</th>
-                  <th>x</th>
                   <th>Treatment duration</th>
-                  <th>Treatment period</th>
-                  <th>Comment</th>
+                  <th>Prescription Date</th>
                 </tr>
               </thead>
               <tbody>
-                 for event in all_events
+                {% for drug in prescribed_drugs %}
                 <tr>
-                  <td></td>
-                  <td></td>
-                    <td></td>
-                    <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{ drug.drug_name }}</td>
+                    <td>{{ drug.dosage }} mg</td>
+                  <td>{{ drug.frequency }} times</td>
+                  <td>{{ drug.days }} days</td>
+                  <td>{{ drug.created_at }}</td>
                 </tr>
-                 endfor 
+                 {% endfor %}
                 </tbody>
             </table>
         </section>

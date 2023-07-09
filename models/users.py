@@ -10,7 +10,7 @@ from flask_login import UserMixin
 from werkzeug.security import check_password_hash
 
 
-class User(BaseModel, Base, UserMixin):
+class User(UserMixin, BaseModel, Base):
     """Class implements User"""
     __tablename__ = "users"
     name = Column(String(128), nullable=False)
@@ -25,6 +25,9 @@ class User(BaseModel, Base, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+    
+    def get_id(self):
+        return str(self.id)  # Convert the user ID to string
 
     # Flask-Login Required Methods
 
@@ -36,6 +39,3 @@ class User(BaseModel, Base, UserMixin):
 
     def is_anonymous(self):
         return False  # Assuming all users are not anonymous
-
-    def get_id(self):
-        return str(self.id)  # Convert the user ID to string

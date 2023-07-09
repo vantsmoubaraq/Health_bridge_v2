@@ -93,9 +93,8 @@
     <section class="main2">
         
 
-      <h2><a class="bread_crumb" href="/">Patients /</a></h2><h2><a class="bread_crumb" href="/single/{{ patient.id }}">{{ patient.name }} /</a></h2><h3>Prescriptions</h3>
-      <button id="action">IMPORT</button>     
-      <a href="#" id="edit"><button class="btn1">CREATE</button></a>
+      <h2><a class="bread_crumb" href="/">Patients /</a></h2><h2><a class="bread_crumb" href="/single/{{ patient.id }}">{{ patient.name }} /</a></h2><h3>Prescriptions</h3>     
+      <a href="/prescriptions_page/{{ patient.id }}" id="edit"><button class="btn1" id="create">CREATE</button></a>
   </section>
     
     <table>
@@ -107,20 +106,18 @@
           <th>Prescription Date</th>
           <th>Physician</th>
           <th>Pharmacy</th>
-          <th>State</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {% for drug in drugs %}
+        {% for prescription in prescriptions %}
         <tr>
-          <td><input type="checkbox" name="prescription[]" value="{{ drug.prescriptionId }}"></td>
+          <td>{{ prescription.id }}</td>
           <td></td>
-          <td>{{ patient.name }}</td>
-          <td>{{ now }}</td>
-          <td>Dr. Kevin Mwongera</td>
+          <td><a href="http://127.0.0.1:5000/single_prescription/{{ prescription.id }}">{{ patient.name }}</a></td>
+          <td>{{ prescription.created_at }}</td>
+          <td>{{ user.name }}</td>
           <td>HealthBridge Pharmacy</td>
-          <td></td>
           <td><a class="delete-icon" href="#"><i class="fa fa-trash"></i></a></td>
         </tr>
         {% endfor %}
@@ -128,6 +125,6 @@
       </tbody>
     </table>
   </body>
-  <script type="text/javascript" src="../static/scripts/search_prescriptions.js"></script>
+  <script type="text/javascript" src="../static/scripts/create_prescription.js"></script>
   <script type="text/javascript" src="../static/scripts/delete_prescription.js"></script>
 </html>
