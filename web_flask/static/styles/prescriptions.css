@@ -148,7 +148,6 @@ ul {
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: center;
-    margin-left: ;
     position: absolute;
     left: 0px;
     right: 0px;
@@ -518,4 +517,16 @@ a {
     display: inline-block;
     margin-top: -50px;
     margin-left: 80%;
+  }
+
+  .flash-message {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    z-index: 9999;
   }

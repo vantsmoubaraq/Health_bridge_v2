@@ -46,16 +46,12 @@
             <section class="des">
                 <div class="left">
                     Related Patient<br>
-                    <h7 id="space">Payment Terms</h7>
+                    <h7 id="space">Payment Method</h7>
                 </div>
                 <div class="middle1">
 			{{ patient.name }}
 		    <br>
-            <select id="dropdown">
-                <option value="option1">HealthBridge</option>
-                <option value="option2"></option>
-                <option value="option3"></option>
-              </select>
+            <p>Cash</p>
               
                 </div>
                 <div class="middle2">
@@ -63,8 +59,8 @@
                     <h7 id="space">Invoice Date</h7><br>
                 </div>
                 <div class="right">
-                    {{ patient.address }}<br>
-                    <input type="text" id="dateInput" placeholder="Select a date and time" readonly>
+                    {{ user.name }}<br>
+                    {{ invoice.created_at}}
                     <div id="calendarDropdown" class="dropdown-content"></div>
 		    
                 </div>
@@ -222,7 +218,7 @@
                 </tr>
               </thead>
               <tbody>
-                {% for event in all_events %}
+                for event in all_events
                 <tr>
                   <td></td>
                   <td></td>
@@ -233,7 +229,7 @@
                   <td></td>
                   <td></td>
                 </tr>
-                {% endfor %}
+                endfor
                 </tbody>
             </table>
 

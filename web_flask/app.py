@@ -15,6 +15,7 @@ from flask_mail import Mail, Message
 import requests
 from datetime import datetime, timedelta, timezone
 from itsdangerous import URLSafeTimedSerializer
+from werkzeug.datastructures import MultiDict
 import pytz
 import secrets
 from functools import wraps
@@ -282,6 +283,7 @@ def create_drug():
     return render_template("drugs_form.html")
 
 @app.route("/prescriptions/<string:patient_id>", strict_slashes=False)
+@login_required
 def add_prescriptions(patient_id):
     """Displays prescriptions for a patient"""
     if models.storage_env == "db":
@@ -289,12 +291,29 @@ def add_prescriptions(patient_id):
     else:
         models.storage.reload()
     patient = models.storage.get("Patient", patient_id)
-    drugs = patient.drugs
+    prescriptions = sorted(models.storage.search_with_patient_id("Prescription", patient_id), key=lambda x: x.created_at, reverse=True)
     now = datetime.now().strftime('%Y-%m-%d  %H:%M:%S')
-    return render_template("prescriptions_view.html", patient=patient, drugs=drugs, now=now)
+    user = current_user
+    return render_template("prescriptions_view.html", patient=patient, prescriptions=prescriptions, now=now, user=user)
+
+@app.route("/single_prescription/<string:prescription_id>")
+@login_required
+def display_prescription(prescription_id):
+    """Shows single prescription"""
+    models.storage.save()
+    prescription = models.storage.get("Prescription", prescription_id)
+    now = datetime.now().strftime('%Y-%m-%d  %H:%M:%S')
+    user = current_user
+    patient_id = prescription.patient_id
+    patient = models.storage.get("Patient", patient_id)
+    prescribed_drugs =sorted(models.storage.search_with_prescription_id("Prescribed_drug", prescription_id), key=lambda x: x.created_at, reverse=True)
+    for drug in prescribed_drugs:
+        actual_drug = models.storage.get("Drug", drug.drug_id)
+        drug.drug_name = actual_drug.name
+    return render_template("prescription_display.html", prescription=prescription, patient=patient, now=now, user=user, prescribed_drugs=prescribed_drugs)
 
 @app.route("/invoices/<string:patient_id>", strict_slashes=False)
-def add_invoices(patient_id):
+def show_invoices(patient_id):
     """Displays prescriptions for a patient"""
     if models.storage_env == "db":
         models.storage.save()
@@ -302,8 +321,29 @@ def add_invoices(patient_id):
         models.storage.reload()
     patient = models.storage.get("Patient", patient_id)
     drugs = patient.drugs
-    now = datetime.now().strftime('%Y-%m-%d  %H:%M:%S')
-    return render_template("invoices.html", patient=patient, drugs=drugs, now=now)
+    invoices = sorted(models.storage.search_with_patient_id("Invoice", patient_id), key=lambda x: x.created_at, reverse=True)
+    total_amount = 0
+    invoice_status = None
+    for invoice in invoices:
+        prescription_id = invoice.prescription_id
+        prescribed_drugs =sorted(models.storage.search_with_prescription_id("Prescribed_drug", prescription_id), key=lambda x: x.created_at, reverse=True)
+        total_amount = 0
+        for drug in prescribed_drugs:
+            actual_drug = models.storage.get("Drug", drug.drug_id)
+            total_amount += actual_drug.price
+        invoice.total_amount = total_amount
+        payment = models.storage.search_one("Payment", invoice_id=invoice.id)
+        if payment is None:
+            invoice.paid = 0
+        else:
+            invoice.paid = payment.paid
+        if invoice.paid < total_amount:
+            invoice.status = "Open"
+        else:
+            invoice.status = "Paid"
+        invoice_status = invoice.status
+    
+    return render_template("invoices.html", patient=patient, drugs=drugs, invoices=invoices, invoice_status=invoice_status)
 
 @app.route("/all_payments/<string:patient_id>", strict_slashes=False)
 def all_payments(patient_id):
@@ -321,6 +361,21 @@ def all_payments(patient_id):
             patient_payments.append(payment)
 
     return render_template("payments_view.html", patient=patient, patient_payments=patient_payments)
+
+@app.route("/single_invoice/<string:invoice_id>", strict_slashes=False)
+@login_required
+def single_invoice(invoice_id):
+    """shows single invoice"""
+    if not invoice_id:
+        abort(404)
+    invoice = models.storage.get("Invoice", invoice_id)
+    patient_id = invoice.patient_id
+    patient = models.storage.get("Patient", patient_id)
+    user = current_user
+    prescription_id = invoice.prescription_id
+    if not invoice:
+        abort(404)
+    return render_template("customer_invoices.html", invoice=invoice, patient=patient, user=user)
 
 @app.route("/create_payment/<string:patient_id>", strict_slashes=False)
 def create_payment(patient_id):
@@ -441,6 +496,7 @@ def delete_service(service_id):
     return redirect("/services")
 
 @app.route("/create_service", strict_slashes=False)
+@login_required
 def create_service():
     """Displays service creation form"""
     return render_template("service_create_form.html")
@@ -462,6 +518,40 @@ def search_service():
     services = models.storage.search(query, "Service")
     return render_template("service_search.html", services=services)
 
+@app.route("/prescriptions_page/<string:patient_id>", strict_slashes=False)
+@login_required
+def prescribe(patient_id):
+    models.storage.save()
+    if not patient_id:
+        abort(404)
+    patient = models.storage.get("Patient", patient_id)
+    if not patient:
+        abort(404)
+    user = current_user
+    drugs = list(models.storage.all("Drug").values())
+    prescription = sorted(list(models.storage.all("Prescription").values()), key=lambda x: x.created_at)[-1]
+    return render_template("patients_prescriptions.html", patient=patient, user=user, drugs=drugs, prescription=prescription)
+
+@app.route("/prescriptions_edit/<string:prescription_id>", strict_slashes=False)
+@login_required
+def edit_prescription(prescription_id):
+    """Edits prescriptions"""
+    if not prescription_id:
+        abort(404)
+    prescription = models.storage.get("Prescription", prescription_id)
+    if not prescription:
+        abort(404)
+    drugs = list(models.storage.all("Drug").values())
+    user = current_user
+    patient_id = prescription.patient_id
+    patient = models.storage.get("Patient", patient_id)
+    prescribed_drugs =sorted(models.storage.search_with_prescription_id("Prescribed_drug", prescription_id), key=lambda x: x.created_at, reverse=True)
+    for drug in prescribed_drugs:
+        actual_drug = models.storage.get("Drug", drug.drug_id)
+        drug.drug_name = actual_drug.name
+    return render_template("prescription_edit.html", patient=patient, user=user, drugs=drugs, prescription=prescription, prescribed_drugs=prescribed_drugs)
+    
+    
 
 def events(response):
     """returns all events in last 7 days"""

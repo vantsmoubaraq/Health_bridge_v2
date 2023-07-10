@@ -121,3 +121,18 @@ class DB_Storage:
     def rollback(self):
         """rollback"""
         self.__session.rollback()
+
+    def search_with_patient_id(self, cls, patient_id):
+        """search items with specific id"""
+        result = self.__session.query(classes[cls]).filter_by(patient_id=patient_id).all()
+        return result
+
+    def search_with_prescription_id(self, cls, prescription_id):
+        """search items with specific id"""
+        result = self.__session.query(classes[cls]).filter_by(prescription_id=prescription_id).all()
+        return result
+
+    def search_with_invoice_id(self, cls, invoice_id):
+        """search items with specific id"""
+        result = self.__session.query(classes[cls]).filter_by(invoice_id=invoice_id).all()
+        return result
