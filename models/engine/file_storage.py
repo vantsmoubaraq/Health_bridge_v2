@@ -8,10 +8,11 @@ from models.drugs import Drug
 from models.payments import Payment
 from models.users import User
 from models.services import Service
+from models.procurements import Procurement
 from datetime import datetime
 import json
 
-classes = {"Patient": Patient, "Service": Service, "Drug": Drug, "Payment": Payment, "User": User}
+classes = {"Procurement": Procurement, "Patient": Patient, "Service": Service, "Drug": Drug, "Payment": Payment, "User": User}
 
 
 class FileStorage:
@@ -94,3 +95,10 @@ class FileStorage:
     def close(self):
         """deserializes objects from file storage"""
         self.reload()
+
+    def get_drug_by_name(self, drug_name):
+        """Retrieves a Drug object by its name"""
+        for drug in self.__objects.values():
+            if isinstance(drug, Drug) and drug.name == drug_name:
+                return drug
+        return None
