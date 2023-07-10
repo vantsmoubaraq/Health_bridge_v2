@@ -131,3 +131,8 @@ class DB_Storage:
         """search items with specific id"""
         result = self.__session.query(classes[cls]).filter_by(prescription_id=prescription_id).all()
         return result
+
+    def search_with_invoice_id(self, cls, invoice_id):
+        """search items with specific id"""
+        result = self.__session.query(classes[cls]).filter_by(invoice_id=invoice_id).all()
+        return result

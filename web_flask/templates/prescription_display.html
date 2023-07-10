@@ -34,7 +34,7 @@
         <a href="http://127.0.0.1:5000/prescriptions_edit/{{ prescription.id }}" id="edit"><button class="btn1">EDIT</button></a>
     </section>
     <div class="line">
-        <button class="btn"><a>SEND TO PHARMACY</a></button> 
+        <button class="btn" id="send"><a>GENERATE INVOICE</a></button> 
     </div>
 
     <main class="main">
@@ -87,7 +87,8 @@
                 </tbody>
             </table>
         </section>
+        <div id="flashMessage" class="flash-message"></div>
     </main>
 </body>
-<script src="../static/scripts/prescriptions.js"></script>
+<script src="../static/scripts/create_prescription_invoice.js"></script>
 </html>

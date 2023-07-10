@@ -5,14 +5,14 @@ deleteIcons.forEach((icon) => {
 //var trans = this.parentNode.parentNode.querySelector(".transaction");
 icon.addEventListener('click', function(event){
 const row = event.target.closest('tr');
-var trans = row.children[5]
+var trans = row.children[2]
 var id = trans.textContent;
 
 const requestOptions = {
 	method: "DELETE",
 }
 
-fetch('http://127.0.0.1:5001/api/v1/payment/' + id, requestOptions).then(
+fetch('http://127.0.0.1:5001/api/v1/invoice/' + id, requestOptions).then(
 response => response.json()).then(
 data => { 
 	console.log(data);
