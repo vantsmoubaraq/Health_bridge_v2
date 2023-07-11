@@ -518,6 +518,19 @@ def search_service():
     services = models.storage.search(query, "Service")
     return render_template("service_search.html", services=services)
 
+<<<<<<< HEAD
+@app.route("/procurements", methods=["GET"])
+def get_procurements():
+    """Displays all procurements"""
+    if models.storage_env == "db":
+        models.storage.save()
+    else:
+        models.storage.reload()
+    procurements = sorted(list(models.storage.all("Procurement").values()),
+                          key=lambda p: p.created_at)
+    return render_template("procurements.html", procurements=procurements)
+
+=======
 @app.route("/prescriptions_page/<string:patient_id>", strict_slashes=False)
 @login_required
 def prescribe(patient_id):
@@ -552,6 +565,7 @@ def edit_prescription(prescription_id):
     return render_template("prescription_edit.html", patient=patient, user=user, drugs=drugs, prescription=prescription, prescribed_drugs=prescribed_drugs)
     
     
+>>>>>>> a67c27bf4b34b060782c6463bece79780dab4cbb
 
 def events(response):
     """returns all events in last 7 days"""

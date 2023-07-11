@@ -17,8 +17,9 @@ from models.invoices import Invoice
 from models.prescribed_drugs import Prescribed_drug
 from models.deliverables import Deliverable
 from models.messages import Message
+from models.procurements import Procurement
 
-classes = {"Patient": Patient, "Service": Service, "Drug": Drug, "Payment": Payment, "patient_drug": patient_drug, "User": User,
+classes = {"Procurement": Procurement,"Patient": Patient, "Service": Service, "Drug": Drug, "Payment": Payment, "patient_drug": patient_drug, "User": User,
             "Prescription": Prescription, "Invoice": Invoice, "Prescribed_drug": Prescribed_drug, "Deliverable": Deliverable, "Message": Message}
 
 
