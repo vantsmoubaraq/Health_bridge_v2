@@ -35,9 +35,8 @@
             table tbody tr:last-of-type {
                 border-bottom: 2px solid #27db3f;
             }
-            .description {
+            .price {
                 color: #27db3f;
-                font-size: 1em;
             }
             .delete-icon {
                 display: inline-block;
@@ -46,6 +45,10 @@
                 background-image: url('https://assets.mockflow.com/app/wireframepro/svg/default/trash.svg');
                 background-size: cover;
                 cursor: pointer;
+            }
+            a {
+                text-decoration: None;
+                color: #27db3f;
             }
         </style>
 </head>
@@ -88,9 +91,9 @@
             {% for service in services %}
             <tr>
                 <td>{{ service.id }}</td>
-                <td>{{ service.name }}</td>
-                <td class="description">{{ service.description }}</td>
-                <td>{{ service.price }}</td>
+                <td><a href="/edit_service/{{ service.id }}">{{ service.name }}</a></td>
+                <td >{{ service.description }}</td>
+                <td class="price">{{ service.price }}</td>
                 <td><a class="delete-icon" href="#"><i class="fa fa-trash"></i></a></td>
             </tr>
             {% endfor %}
@@ -99,5 +102,4 @@
 
     <script type="text/javascript" src="../static/scripts/search_services.js"></script>
     <script type="text/javascript" src="../static/scripts/delete_service.js"></script>
-</body>
 </html>
