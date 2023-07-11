@@ -18,7 +18,7 @@ def invoices(patient_id=None, invoice_id=None, prescription_id=None):
     if patient_id:
         patient = storage.get("Patient", patient_id)
         if patient is None:
-            return
+            abort(404)
     elif invoice_id:
         invoice = storage.get("Invoice", invoice_id)
         if invoice is None:

@@ -38,7 +38,7 @@ class DB_Storage:
         self.__engine = create_engine("{}://{}:{}@localhost:3306/{}".
                                       format(dialct, user, password, database))
         #if environment == "test":
-        #   Base.metadata.drop_all(self.__engine)
+        #  Base.metadata.drop_all(self.__engine)
 
     def create(self, obj):
         """Stage object"""

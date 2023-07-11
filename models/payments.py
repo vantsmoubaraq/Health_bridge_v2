@@ -14,4 +14,4 @@ class Payment(BaseModel, Base):
         patient_id = Column(String(60), ForeignKey("patients.id"),
                             nullable=False)
         paid = Column(Integer, nullable=True)
-        invoice_id = Column(String(60), ForeignKey("invoices.id"))
+        invoice_id = Column(String(60), ForeignKey("invoices.id", ondelete="CASCADE"))

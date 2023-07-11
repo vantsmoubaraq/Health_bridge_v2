@@ -8,9 +8,9 @@ from api.v1.views import ui
 from models import storage
 
 
-@ui.route("/payments/<string:patient_id>", methods=["GET", "POST"])
+@ui.route("/payments/<string:patient_id>/<string:invoice_id>", methods=["GET", "POST"])
 @ui.route("/payment/<string:payment_id>", methods=["GET", "PUT", "DELETE"])
-def payments(payment_id=None, patient_id=None):
+def payments(payment_id=None, patient_id=None, invoice_id=None):
     """Handles all default RESTful API actions for Payment class"""
     if payment_id:
         payment = storage.get("Payment", payment_id)
@@ -34,11 +34,10 @@ def payments(payment_id=None, patient_id=None):
         data = request.get_json()
         if data is None:
             return jsonify({"message": "Not valid JSON"})
-        elif "amount" not in data:
-            return jsonify({"message": "amount must be specified"})
         if data["paid"] == "None" or data["paid"] == "" or data["paid"] == 0:
             data["paid"] = 0
         data["patient_id"] = patient.id
+        data["invoice_id"] = invoice_id
         new_payment = Payment(**data)
         new_payment.save()
         pay = storage.get("Payment", new_payment.id)

@@ -102,7 +102,7 @@
         <tr>
           <th>Invoice Date</th>
           <th>Patient Name</th>
-          <th>Transaction id</th>
+          <th>Invoice id</th>
           <th>Total</th>
           <th>Paid</th>
           <th>Amount Due</th>
@@ -119,7 +119,7 @@
           <td>{{ invoice.total_amount }} shs</td>
           <td>{{ invoice.paid }} shs</td>
           <td>{% set balance = invoice.total_amount - invoice.paid %} {{ balance }} shs</td>
-          <td>{{ invoice_status }}</td>
+          <td>{{ invoice.status }}</td>
           
           <td><a class="delete-icon" id="pay" href="#"><i class="fa fa-trash"></i></a></td>
         </tr>

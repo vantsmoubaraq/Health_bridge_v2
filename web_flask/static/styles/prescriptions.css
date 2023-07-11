@@ -399,10 +399,33 @@ input {
     
 }
 
+.btn3 {
+  padding: 8px 20px;
+  border: none;
+  background-color: hsl(120, 64%, 35%);
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  color: hsl(0, 0%, 100%);
+  cursor: pointer;
+  margin-left: 0%;
+  margin-top: 40px;
+  font-size: 12px;
+  width: 100px;
+  
+  
+}
 .btn1:hover {
     background-color: hsl(180, 7%, 97%);
     color: rgb(5, 121, 5);
     border: 2px solid rgb(5, 121, 5);
+
+}
+
+.btn3:hover {
+  background-color: hsl(180, 7%, 97%);
+  color: rgb(5, 121, 5);
+  border: 2px solid rgb(5, 121, 5);
 
 }
 a {
@@ -521,12 +544,31 @@ a {
 
   .flash-message {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    padding: 10px;
-    background-color: #4CAF50;
+    top: 70px;
+    left: 500px;
+    padding: 0px;
+    background-color:  hsl(140, 84%, 42%);
     color: white;
     font-weight: bold;
     border-radius: 5px;
     z-index: 9999;
+  }
+
+  #pres {
+      margin-top: 0px;
+      font-size: 20px;
+      color: #000000;
+      z-index: 9999;
+      font-style: normal;
+      font-weight: 100;
+      font-family: 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  .delete-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('https://assets.mockflow.com/app/wireframepro/svg/default/trash.svg');
+    background-size: cover;
+    cursor: pointer;
   }

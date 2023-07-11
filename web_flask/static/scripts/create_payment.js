@@ -3,6 +3,8 @@ submitButton.addEventListener('click', (event) => {
     event.preventDefault();
     const form = document.getElementById('myForm');
     const formData = new FormData(form);
+    const patient_id = window.location.pathname.split('/')[2]
+    const invoice_id = window.location.pathname.split('/')[3]
 
         const data = {};
                 for (const [key, value] of formData.entries()) {
@@ -15,15 +17,15 @@ submitButton.addEventListener('click', (event) => {
         headers: {'Content-Type': 'application/json'}
     };
 
-    const id = window.location.pathname.split('/')[2]
+   
 
 
-    fetch('http://127.0.0.1:5001/api/v1/payments/' + id, requestOptions)
+    fetch('http://127.0.0.1:5001/api/v1/payments/' + patient_id + "/" + invoice_id, requestOptions)
         .then(response => response.json())
         .then(data => {
                         console.log(data);
                         const my_id = data.id;
-                       window.location.href = `/all_payments/${id}`;
+                       window.location.href = `/invoices/${id}`;
                 })
         .catch(error => console.error(error));
 });

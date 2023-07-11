@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     cardPopup.classList.remove('hidden');
   });
 
-  document.addEventListener('click', function(event) {
+  /*document.addEventListener('click', function(event) {
     var target = event.target;
     if (!cardPopup.contains(target) && target !== addButton) {
       cardPopup.classList.add('hidden');
     }
-  });
+  });*/
 });

@@ -88,3 +88,43 @@ function resetForm() {
     const form = document.getElementById('yourFormId');
     form.reset();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var cardPopup = document.getElementById('cardPopup');
+    var medicinesTable = document.getElementById('medicines');
+  
+    // Add event listener to each row in the table
+    var rows = medicinesTable.getElementsByTagName('tr');
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      row.addEventListener('dblclick', function(event) {
+        autofillForm(event.target.parentNode);
+        cardPopup.classList.remove('hidden');
+      });
+    }
+  });
+
+
+  function autofillForm(row) {
+    const drugName = row.cells[0].textContent;
+    const dose = row.cells[1].textContent.split(" ")[0];
+    const frequency = row.cells[2].textContent.split(" ")[0];
+    const days = row.cells[3].textContent.split(" ")[0];
+
+    const drugsSelect = document.getElementById("drugs");
+
+    // Loop through the options to find the matching text
+    for (let i = 0; i < drugsSelect.options.length; i++) {
+    const option = drugsSelect.options[i];
+    if (option.text === drugName) {
+        // Set the matching option as selected
+        option.selected = true;
+        break; // Exit the loop since we found the match
+    }
+    }
+    
+    document.getElementById("drugs").value = drugName;
+    document.getElementById("dose").value = dose;
+    document.getElementById("Frequency").value = frequency;
+    document.getElementById("days").value = days;
+  }
