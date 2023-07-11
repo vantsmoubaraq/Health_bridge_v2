@@ -5,11 +5,54 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./static/styles/patients_pharmacy.css" />
+        <style>
+            /* Table style */
+            table {
+                border-collapse: collapse;
+                margin: auto;
+                width: 100%;
+                font-size: 1.2em;
+                min-width: 1000px;
+                border-radius: 5px 5px 0 0;
+                overflow: hidden;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            }
+            table thead tr {
+                background-color: #c3cac2;
+                color: #111010;
+                text-align: left;
+            }
+            table th,
+            table td {
+                padding: 12px 15px;
+            }
+            table tbody tr {
+                border-bottom: 1px solid #dddddd;
+            }
+            table tbody tr:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+            table tbody tr:last-of-type {
+                border-bottom: 2px solid #27db3f;
+            }
+            .description {
+                color: #27db3f;
+                font-size: 1em;
+            }
+            .delete-icon {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                background-image: url('https://assets.mockflow.com/app/wireframepro/svg/default/trash.svg');
+                background-size: cover;
+                cursor: pointer;
+            }
+        </style>
 </head>
 
 <body>
     <header class="head">
-        <nav >
+        <nav>
             <img
                 src="https://assets.mockflow.com/app/wireframepro/company/C06cebf9edc514714a50cc24918f5b156/projects/MYQX0R3SPob/images/thumbnails/Me6d09e02eed3c78df2c2c0e04e0817c21678708408116"
                 alt="photo"
@@ -25,213 +68,36 @@
     </header>
     <section class="main2">
         <h2>Services</h2>
-        <input  type="text" placeholder="Search..." id="search-query-s">
+        <input type="text" placeholder="Search..." id="search-query-s">
         <a href="http://127.0.0.1:5000/create_service">
             <button class="btn">Create</button>
         </a>
     </section>
-    
-    <main class="main">
-    {% for service in services %}
-    <section class="card">
-        <div class="left-side">
-            <img src="{{ service.service_img }}" alt="photo" class="left-side-img2" />
-        </div>
-                    
-        <div class="right-side">
-            <p class="description">
-                <h1 class="service-holder">
-                    <a class="service-name" href="/single_service/{{ service.id }}">
-                        {{ service.name }}
-                    </a>
-                </h1>
-                <div class="info">
-                    Price: {{ service.price }} Shs<br>
-                    Description: {{ service.description }}
-                </div>
-            </p>
-        </div>
-    </section>
-    {% endfor %}
-            
-       <!-- <section class="card">
-                
-            <div class="left-side">
-                <img
-                    src="https://assets.mockflow.com/app/wireframepro/company/Cf705e8a62740483fa06326b4bc66cc7d/projects/MspUGqjSPob/images/thumbnails/Mb23b1c4db39668d54c528614b3b846f41677756553868"
-                    alt="photo"
-                    class="left-side-img"
-                />
-            </div>
-                
-            <div class="right-side">
-                    
-                <p class="description">
-                    <h1 class="patient-name">Actinac plus</h1>
-		    <div class="info">
-		    	Price: 500 Shs<br>
-                    	On hand: 7 units
-		    </div>
-                </p>
-                    
-            </div>
-                
-        </section>
-        <section class="card">
-                
-            <div class="left-side">
-                <img
-                    src="https://assets.mockflow.com/app/wireframepro/company/Cf705e8a62740483fa06326b4bc66cc7d/projects/MspUGqjSPob/images/thumbnails/Mec7083501466e4a0126a8170eb6fce551677756908676"
-                    alt="photo"
-                    class="left-side-img"
-                />
-            </div>
-                
-            <div class="right-side">
-                    
-                <p class="description">
-                    <h1 class="patient-name">Action</h1>
-		    <div class="info">
-		    	Price: 200 USh<br>
-                    	On hand: 192 units
-		    </div>
-                </p>
-            </div>
-        </section>
-        
-        
-        <section class="card">
-                
-            <div class="left-side">
-                <img
-                    src="https://assets.mockflow.com/app/wireframepro/company/Cf705e8a62740483fa06326b4bc66cc7d/projects/MspUGqjSPob/images/thumbnails/M3e5d03e066eb79e1c0bae3df861025bb1677757031394"
-                    alt="photo"
-                    class="left-side-img"
-                />
-            </div>
-                
-            <div class="right-side">
-                    
-                <p class="description">
-                    <h1 class="patient-name">Aceclofenac</h1>
-		    <div class="info">
-		    	Price: 1 Shs<br>
-                    	On hand: 200 units
-		    </div>
-                </p>
-                    
-            </div>
-                
-        </section>
-        <section class="card">
-                
-            <div class="left-side">
-                <img
-                    src="https://assets.mockflow.com/app/wireframepro/company/Cf705e8a62740483fa06326b4bc66cc7d/projects/MspUGqjSPob/images/thumbnails/M13f61407b8ccf5b727e47fb20e0e6c3b1677756402396"
-                    alt="photo"
-                    class="left-side-img"
-                />
-            </div>
-                
-            <div class="right-side">
-                    
-                <p class="description">
-                    <h1 class="patient-name">Panadol</h1>
-		    <div class="info">
-		    	Price: 4 Shs<br>
-                    	On hand: 300 units
-		    </div>
-                </p>
-                    
-            </div>
-                
-        </section>
-        <section class="card">
-                
-            <div class="left-side">
-                <img
-                    src="https://assets.mockflow.com/app/wireframepro/company/Cf705e8a62740483fa06326b4bc66cc7d/projects/MspUGqjSPob/images/thumbnails/Mfa272b78d407ae0482487f3ae11e93031677757339812"
-                    alt="photo"
-                    class="left-side-img"
-                />
-            </div>
-                
-            <div class="right-side">
-                    
-                <p class="description">
-                    <h1 class="patient-name">Dynapar</h1>
-		    <div class="info">
-		    	Price: 15 Shs<br>
-                    	On hand: 29 units
-		    </div>
-                </p>
-                    
-            </div>
-                
-        </section>
-            
-        <section class="card">
-                
-            <div class="left-side">
-                <img
-                    src="https://assets.mockflow.com/app/wireframepro/company/Cf705e8a62740483fa06326b4bc66cc7d/projects/MspUGqjSPob/images/thumbnails/M13e94b7ad72ef58d572dc02072f37e271677757682672"
-                    alt="photo"
-                    class="left-side-img"
-                />
-            </div>
-                
-            <div class="right-side">
-                    
-                <p class="description">
-                    <h1 class="patient-name">Abnal nasal drop</h1>
-		    <div class="info">
-		    	Price: 5000 Shs<br>
-                    	On hand: 100 units
-	    	    </div>
-                </p>   
-            </div>
-        </section>
 
-        <section class="card">
-            <div class="left-side">
-                <img
-                    src="https://assets.mockflow.com/app/wireframepro/company/Cf705e8a62740483fa06326b4bc66cc7d/projects/MspUGqjSPob/images/thumbnails/M3e5d03e066eb79e1c0bae3df861025bb1677757031394"
-                    alt="photo"
-                    class="left-side-img"
-                />
-            </div>
-                
-            <div class="right-side">
-                <p class="description">
-                    <h1 class="patient-name">Cefixime</h1>
-		    <div class"info">
-		    	Price: 4 Shs<br>
-                    	On hand: 300 units
-		    </div>
-                </p>   
-            </div>     
-        </section>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td>{{ service.id }}</td>
+                <td>{{ service.name }}</td>
+                <td class="description">{{ service.description }}</td>
+                <td>{{ service.price }}</td>
+                <td><a class="delete-icon" href="#"><i class="fa fa-trash"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-        <section class="card">   
-            <div class="left-side">
-                <img
-                    src="https://assets.mockflow.com/app/wireframepro/company/Cf705e8a62740483fa06326b4bc66cc7d/projects/MspUGqjSPob/images/thumbnails/M8b591ece1727d6e1bf3cffee077867491677757680797"
-                    alt="photo"
-                    class="left-side-img"
-                />
-            </div>
-                
-            <div class="right-side">
-                <p class="description">
-                    <h1 class="patient-name">Diclofemac</h1>
-		    <div class="info">
-		    	Price: 4 Shs<br>
-                    	On hand: 400 units
-		    </div>
-                </p>
-            </div>
-	</section>-->
-    </main>
+    <script type="text/javascript" src="../static/scripts/search_services.js"></script>
+    <script type="text/javascript" src="../static/scripts/delete_service.js"></script>
 </body>
-<script type="text/javascript" src="../static/scripts/search_services.js"></script>
 </html>
