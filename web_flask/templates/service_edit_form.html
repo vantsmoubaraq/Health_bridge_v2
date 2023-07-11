@@ -21,16 +21,16 @@
             </ul>
         </nav>
     </header>
-	<h2>Service Registration Form</h2>
+	<h2>Service Edit Form</h2>
 	<form id="myForms" method="post">
 		<fieldset>
 			
 			<label for="name">Name:</label>
 			<input type="text" id="name" name="name" value="{{ service.name }}"required><br><br>
-			<label for="price">Description:</label>
-			<input type="number" id="price" name="price" value="{{ service.description}}" required><br><br>
-			<label for="quantity">Price:</label>
-            <input type="number" id="quantity" name="quantity" value="{{ service.price }}" required><br><br>
+			<label for="description">Description:</label>
+			<input type="text" id="description" name="description" value="{{ service.description}}" required><br><br>
+			<label for="price">Price:</label>
+            <input type="number" id="price" name="price" value="{{ service.price }}" required><br><br>
 		</fieldset>
 		
 		<button type="submit" value="Submit" id="btns">Submit</button> 

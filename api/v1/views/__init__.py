@@ -15,3 +15,4 @@ from api.v1.views.invoices import *
 from api.v1.views.prescribed_drugs import *
 from api.v1.views.services import *
 from api.v1.views.chatgpt import *
+from api.v1.views.procurements import *
