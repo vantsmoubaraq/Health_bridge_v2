@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Single patient prescription Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/styles/prescriptions.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+</head>
+
+<body>
+    <header class="head">
+        <nav>
+            <img
+                src="https://assets.mockflow.com/app/wireframepro/company/C06cebf9edc514714a50cc24918f5b156/projects/MYQX0R3SPob/images/thumbnails/Me6d09e02eed3c78df2c2c0e04e0817c21678708408116"
+                alt="photo"
+                class="left-side-img3"
+            />
+            <h1 ><a class="title" href="/">HealthBridge</a></h1>
+            <ul>
+                <li><a class="patients" href="/">Patients</a></li>
+                <li><a class="pharmacy" href="http://127.0.0.1:5000/pharmacy">Pharmacy</a></li>
+
+                <li><a class="appointments" href="/appointments">Appointments</a></li>
+      
+            </ul>
+        </nav>
+    </header>
+
+    <section class="main2">
+        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><h4>Prescriptions</h4>
+        
+        <a href="http://127.0.0.1:5000/prescriptions_edit/{{ prescription.id }}" id="edit"><button class="btn1">EDIT</button></a>
+    </section>
+    <div class="line">
+        <button class="btn" id="send"><a>GENERATE INVOICE</a></button> 
+    </div>
+
+    <main class="main">
+        <section class="card">
+            <h3>Prescriptions</h3>
+
+            <section class="des">
+                <div class="left">
+                    Patient Name<br>
+                    <h7 id="space">Pharmacy</h7>
+                </div>
+                <div class="middle1">
+			 {{ patient.name }}
+		    <br>
+            <p>HealthBridge</p>
+              
+                </div>
+                <div class="middle2">
+                    Physician<br>
+                    <h7 id="space">Prescription Id</h7><br>
+                </div>
+                <div class="right">
+                    {{ user.name }}<br>
+                    <p id="p_id">{{ prescription.id }}</p>
+                    <div id="calendarDropdown" class="dropdown-content"></div>
+		    
+                </div>
+            </section>
+            <!--<h4>Prescription Records</h4>-->
+            <table>
+              <thead>
+                <tr>
+                  <th>Medicines</th>
+                    <th>Dose</th>
+                  <th>Frequency</th>
+                  <th>Treatment duration</th>
+                  <th>Prescription Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for drug in prescribed_drugs %}
+                <tr>
+                  <td>{{ drug.drug_name }}</td>
+                    <td>{{ drug.dosage }} mg</td>
+                  <td>{{ drug.frequency }} times</td>
+                  <td>{{ drug.days }} days</td>
+                  <td>{{ drug.created_at }}</td>
+                </tr>
+                 {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <div id="flashMessage" class="flash-message"></div>
+    </main>
+</body>
+<script src="../static/scripts/create_prescription_invoice.js"></script>
+</html>

@@ -6,6 +6,7 @@ from flask import request, jsonify, abort
 from models import storage
 from models.prescribed_drugs import Prescribed_drug
 from api.v1.views import ui
+from werkzeug.datastructures import MultiDict
 
 
 @ui.route("/prescribe_drug/<string:prescription_id>", methods=["POST"])
@@ -25,18 +26,20 @@ def prescribe_drug(prescription_id=None, prescribed_drug_id=None):
             return jsonify({"message": "invalid prescribed_drug_id"})
     
     if request.method == "POST":
-        data = request.get_json()
-        if not data:
-            return
-        elif "drug_id" not in data:
+        if "drug_id" not in request.form:
             return jsonify({"message": "drug missing"})
-        elif "frequency" not in data:
+        elif "frequency" not in request.form:
             return jsonify({"message": "frequecy of intake missing"})
-        elif "days" not in data:
+        elif "days" not in request.form:
             return jsonify({"message": "days missing"})
         else:
-            data["prescription_id"] = prescription_id
-            new_prescribed_drug = Prescribed_drug(**data)
+            new_form_data = MultiDict(request.form)
+            new_form_data["prescription_id"] = prescription_id
+            new_prescribed_drug = Prescribed_drug(**new_form_data)
+            drug = storage.get("Drug", new_form_data["drug_id"])
+            days = int(new_form_data["days"])
+            frequency = int(new_form_data["frequency"])
+            drug.quantity -= (frequency * days)
             new_prescribed_drug.save()
             return jsonify(new_prescribed_drug.to_dict()), 200
     elif request.method == "PUT":

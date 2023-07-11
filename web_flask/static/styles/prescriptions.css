@@ -148,7 +148,6 @@ ul {
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: center;
-    margin-left: ;
     position: absolute;
     left: 0px;
     right: 0px;
@@ -406,7 +405,10 @@ input {
     border: 2px solid rgb(5, 121, 5);
 
 }
-
+a {
+  text-decoration: none;
+  color: hsl(0, 0%, 100%);
+}
   .bread_crumb {
     text-decoration: none;
     font-size: 19.5px;
@@ -480,7 +482,10 @@ input {
     font-size: 20px;
   }
 
-
+.totals {
+  justify-content: flex-end;
+  float: right;
+}
   
   @media screen and (max-width: 768px) {
     .card {
@@ -512,4 +517,16 @@ input {
     display: inline-block;
     margin-top: -50px;
     margin-left: 80%;
+  }
+
+  .flash-message {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    z-index: 9999;
   }

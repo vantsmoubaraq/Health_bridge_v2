@@ -38,7 +38,7 @@ def invoices(patient_id=None, invoice_id=None, prescription_id=None):
     elif request.method == "GET":
         return jsonify(invoice.to_dict()), 200
     elif request.method == "DELETE":
-        storage.delete(Invoice)
+        storage.delete(invoice)
         return jsonify({})
     elif request.method == "PUT":
         data = request.get_json()
