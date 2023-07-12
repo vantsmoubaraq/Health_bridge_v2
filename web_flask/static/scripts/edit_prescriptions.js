@@ -90,41 +90,80 @@ function resetForm() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var cardPopup = document.getElementById('cardPopup');
+    var cardPopup1 = document.getElementById('cardPopup1');
     var medicinesTable = document.getElementById('medicines');
+    const prescription_id = document.getElementById("p_id").textContent;
+    const patient_id = window.location.pathname.split('/')[3];
+    
+
   
-    // Add event listener to each row in the table
     var rows = medicinesTable.getElementsByTagName('tr');
-    for (var i = 0; i < rows.length; i++) {
-      var row = rows[i];
-      row.addEventListener('dblclick', function(event) {
-        autofillForm(event.target.parentNode);
-        cardPopup.classList.remove('hidden');
-      });
+for (var i = 0; i < rows.length; i++) {
+  const row = rows[i];
+  row.addEventListener('dblclick', function(event) {
+    const trans = row.children[0].textContent;
+    window.location.href = "/edit_prescribed_drug_form/" + trans + "/" + prescription_id + "/" + patient_id;
+  });
+}
+  });
+
+
+
+
+function addRow(dose, frequency, days, drug_name) {
+    let table = document.getElementById("medicines");
+    let row = table.insertRow(1); // Insert at the second position (index 1)
+  
+    // Create table cells
+    let cell1 = row.insertCell(0);
+    let cell3 = row.insertCell(1);
+    let cell6 = row.insertCell(2);
+    let cell8 = row.insertCell(3);
+    let cell9 = row.insertCell(4);
+  
+    // Add data to cells
+    cell1.textContent = drug_name;
+    cell3.textContent = dose + " mg/mL";
+    cell6.textContent = frequency + " times";
+    cell8.textContent = days + " days";
+    cell9.textContent = getCurrentTime();
+  }
+
+  document.addEventListener('click', function(event) {
+    var target = event.target;
+    if (!cardPopup.contains(target) && target !== addButton && target !== save) {
+      cardPopup.classList.add('hidden');
     }
   });
 
 
-  function autofillForm(row) {
-    const drugName = row.cells[0].textContent;
-    const dose = row.cells[1].textContent.split(" ")[0];
-    const frequency = row.cells[2].textContent.split(" ")[0];
-    const days = row.cells[3].textContent.split(" ")[0];
+  //Delete
+  const deleteIcons = document.querySelectorAll('.delete-icon');
 
-    const drugsSelect = document.getElementById("drugs");
+deleteIcons.forEach((icon) => {
 
-    // Loop through the options to find the matching text
-    for (let i = 0; i < drugsSelect.options.length; i++) {
-    const option = drugsSelect.options[i];
-    if (option.text === drugName) {
-        // Set the matching option as selected
-        option.selected = true;
-        break; // Exit the loop since we found the match
-    }
-    }
-    
-    document.getElementById("drugs").value = drugName;
-    document.getElementById("dose").value = dose;
-    document.getElementById("Frequency").value = frequency;
-    document.getElementById("days").value = days;
-  }
+//var trans = this.parentNode.parentNode.querySelector(".transaction");
+icon.addEventListener('click', function(event){
+const row = event.target.closest('tr');
+var trans = row.children[0]
+var id = trans.textContent;
+
+const requestOptions = {
+	method: "DELETE",
+}
+
+fetch('http://127.0.0.1:5001/api/v1/prescribed_drug/' + id, requestOptions).then(
+response => response.json()).then(
+data => { 
+	console.log(data);
+	deleteRow(icon);
+}
+).catch(error => console.error);
+});
+});
+
+function deleteRow(button) {
+  const row = button.parentNode.parentNode;
+  row.remove();
+}
+

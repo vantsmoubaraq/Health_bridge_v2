@@ -30,7 +30,7 @@
 
     <section class="main2">
         <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}">{{ patient.name }} /</a></h3><h4>Invoice</h4> 
-        <a href="" id="edit"><button class="btn1">EDIT</button></a>
+        <a href="http://127.0.0.1:5000/invoice_service/{{ invoice.id }}" id="edit"><button class="btn1">ADD SERVICE</button></a>
     </section>
     <div class="line">
         <a href="http://127.0.0.1:5000/create_payment/{{ patient.id }}/{{ invoice.id }}"><button class="btn" id="payment" >MAKE PAYMENT</button></a>
@@ -68,7 +68,7 @@
             <table>
               <thead>
                 <tr>
-                  <th>Product</th>
+                  <th>Product/Service</th>
                   <th>Quantity</th>
                   <th>unit price</th>
                   <th>Amount</th>
@@ -81,6 +81,14 @@
                   <td>{{ drug.quantity }} units</td>
                   <td>{{ drug.price }} shs</td>
                   <td>{{ drug.pay }} shs</td>
+                </tr>
+                {% endfor %}
+                {% for service in services %}
+                <tr>
+                  <td>{{ service.name }}</td>
+                  <td>N/A</td>
+                  <td>{{ service.price }} shs</td>
+                  <td>N/A</td>
                 </tr>
                 {% endfor %}
                 </tbody>

@@ -24,6 +24,7 @@ def prescribe_drug(prescription_id=None, prescribed_drug_id=None):
         prescribed_drug = storage.get("Prescribed_drug", prescribed_drug_id)
         if not prescribed_drug:
             return jsonify({"message": "invalid prescribed_drug_id"})
+        drug = storage.get("Drug", prescribed_drug.drug_id)
     
     if request.method == "POST":
         if "drug_id" not in request.form:
@@ -43,16 +44,38 @@ def prescribe_drug(prescription_id=None, prescribed_drug_id=None):
             new_prescribed_drug.save()
             return jsonify(new_prescribed_drug.to_dict()), 200
     elif request.method == "PUT":
-        data = request.get_json()
+        data = request.form
         if not data:
             return
-        for key, value in data.values():
+        if data["drug_id"] != prescribed_drug.drug_id:
+            drug.quantity  += int(prescribed_drug.frequency) * int(prescribed_drug.days)
+            drug.save()
+            new_drug = storage.get("Drug", data["drug_id"])
+            new_drug.quantity -= int(data["frequency"]) * int(data["days"])
+            new_drug.save()
+        else:
+            quantity = int(data["frequency"]) * int(data["days"])
+            addition = (int(prescribed_drug.frequency) * int(prescribed_drug.days)) - quantity
+            drug.quantity += addition
+        """
+        elif "frequency" in data.keys():
+            quantity = int(data["frequency"]) * int(prescribed_drug.days)
+            addition = (int(prescribed_drug.frequency) * int(prescribed_drug.days)) - quantity
+            drug.quantity += addition
+        elif "days" in data.keys():
+            quantity = int(prescribed_drug.frequency) * int(data["days"])
+            addition = (int(prescribed_drug.frequency) * int(prescribed_drug.days)) - quantity
+            drug.quantity += addition"""
+
+        for key, value in data.items():
             if key not in ["prescription_id", "id", "created_at", "updated_at"]:
                 setattr(prescribed_drug, key, value)
         prescribed_drug.save()
-        return jsonify(prescribed_drug), 201
+        return jsonify(prescribed_drug.to_dict()), 201
     elif request.method == "GET":
         return jsonify(prescribed_drug.to_dict()), 200
     elif request.method == "DELETE":
+        drug.quantity += (int(prescribed_drug.frequency) * int(prescribed_drug.days))
+        drug.save()
         storage.delete(prescribed_drug)
         return jsonify({})

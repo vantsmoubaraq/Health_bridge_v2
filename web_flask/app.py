@@ -331,6 +331,19 @@ def show_invoices(patient_id):
             actual_drug = models.storage.get("Drug", drug.drug_id)
             drug.quantity = drug.frequency * drug.days
             total_amount += actual_drug.price * drug.quantity
+        invoiced_services = invoice.invoiced_services
+        service_ids = []
+        for obj in invoiced_services:
+            service_ids.append(obj.service_id)
+        services = []
+        for s_id in service_ids:
+            service = models.storage.get("Service", s_id)
+            services.append(service)
+        for service in services:
+            if service.price is None:
+                pass
+            else:
+                total_amount += service.price
         invoice.total_amount = total_amount
         payment = models.storage.search_one("Payment", invoice_id=invoice.id)
         if payment is None:
@@ -377,6 +390,7 @@ def all_payments(patient_id):
 @login_required
 def single_invoice(invoice_id):
     """shows single invoice"""
+    models.storage.save()
     if not invoice_id:
         abort(404)
     invoice = models.storage.get("Invoice", invoice_id)
@@ -395,6 +409,19 @@ def single_invoice(invoice_id):
         drug.quantity = drug.frequency * drug.days
         drug.pay = drug.quantity * drug.price
         total_amount += drug.pay
+    invoiced_services = invoice.invoiced_services
+    service_ids = []
+    for obj in invoiced_services:
+        service_ids.append(obj.service_id)
+    services = []
+    for s_id in service_ids:
+        service = models.storage.get("Service", s_id)
+        services.append(service)
+    for service in services:
+        if service.price is None:
+            pass
+        else:
+            total_amount += service.price
     payment = models.storage.search_one("Payment", invoice_id=invoice.id)
     if payment is None:
         invoice.paid = 0
@@ -405,7 +432,7 @@ def single_invoice(invoice_id):
     else:
         invoice.status = "Paid"
     invoice.amount_due = total_amount - invoice.paid
-    return render_template("customer_invoices.html", invoice=invoice, patient=patient, user=user, prescribed_drugs=prescribed_drugs, total_amount=total_amount)
+    return render_template("customer_invoices.html", invoice=invoice, patient=patient, user=user, prescribed_drugs=prescribed_drugs, total_amount=total_amount, services=services)
 
 @app.route("/create_payment/<string:patient_id>/<string:invoice_id>", strict_slashes=False)
 def create_payment(patient_id, invoice_id):
@@ -598,8 +625,27 @@ def edit_prescription(prescription_id, patient_id):
         actual_drug = models.storage.get("Drug", drug.drug_id)
         drug.drug_name = actual_drug.name
     return render_template("prescription_edit.html", patient=patient, user=user, drugs=drugs, prescription=prescription, prescribed_drugs=prescribed_drugs)
+
+@app.route("/edit_prescribed_drug_form/<string:drug_id>/<string:prescription_id>/<string:patient_id>", strict_slashes=False)
+def edit_prescribed(drug_id, prescription_id=None, patient_id=None):
+    """Renders prescription form"""
+    drug = models.storage.get("Prescribed_drug", drug_id)
+    actual_drug = models.storage.get("Drug", drug.drug_id)
+    drugs = list(models.storage.all("Drug").values())
+    if not drug:
+        abort(404)
+    return render_template("edit_pres.html", drug=drug, drugs=drugs, actual_drug=actual_drug)
     
-    
+@app.route("/invoice_service/<string:invoice_id>", strict_slashes=False)
+def add_service_invoice(invoice_id):
+    """adds service to invoice"""
+    if not invoice_id:
+        abort(404)
+    invoice = models.storage.get("Invoice", invoice_id)
+    services = list(models.storage.all("Service").values())
+    if not invoice:
+        abort(404)
+    return render_template("invoice_service_form.html", invoice=invoice, services=services)
 
 def events(response):
     """returns all events in last 7 days"""
@@ -634,6 +680,11 @@ def invitees(all_events, headers):
             user_email = r.get("collection", None)[0]["email"]
             invitee_details.append({invitee_id: {"user_name": user_name, "user_email": user_email}})
     return(invitee_details)
+
+@app.route("/AI", strict_slashes=False)
+def chat():
+    """Powers chat app"""
+    return render_template("chatAI.html")
 
 
 if __name__ == "__main__":

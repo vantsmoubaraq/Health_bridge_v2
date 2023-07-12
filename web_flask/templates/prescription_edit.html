@@ -130,9 +130,9 @@
                                 <div class="vertical-line"></div>
                             
                                 <section class="section">
-                                    <select id="drugs">
+                                    <select id="drugs1">
                                         {% for drug in drugs %}
-                                        <option id="drug" value="{{ drug.id }}"">{{ drug.name }}</option>
+                                        <option id="drug1" value="{{ drug.id }}"">{{ drug.name }}</option>
                                         {% endfor %}
                                     </select><br>
                                     <p>{{ patient.created_at }}</p>
@@ -153,11 +153,11 @@
                                 </section>
                             
                                 <div class="vertical-line"></div>
-                                <form class="section" id="yourFormId">
-                                <input type="number" id="dose" placeholder="dose in mg, mL">
-                                <input type="number" id="Frequency" placeholder="Frequency">
-                                <input type="number" id="days" placeholder="days">
-                                <button id="save" type="submit" class="btn3">Save</button>
+                                <form class="section" id="yourFormId1">
+                                <input type="number" id="dose1" placeholder="dose in mg, mL">
+                                <input type="number" id="Frequency1" placeholder="Frequency">
+                                <input type="number" id="days1" placeholder="days">
+                                <button id="save1" type="submit" class="btn3">Save</button>
                                 </form>
                             </div>
                     </div>
@@ -167,22 +167,22 @@
             <table id="medicines">
               <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Medicines</th>
                     <th>Dose</th>
                   <th>Frequency</th>
                   <th>Treatment duration</th>
-                  <th>Prescription Date</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {% for drug in prescribed_drugs %}
                 <tr>
+                    <td>{{ drug.id }}</td>
                   <td>{{ drug.drug_name }}</td>
                     <td>{{ drug.dosage }} mg</td>
                   <td>{{ drug.frequency }} times</td>
                   <td>{{ drug.days }} days</td>
-                  <td>{{ drug.created_at }}</td>
                   <td><a class="delete-icon" href="#"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 {% endfor %}
