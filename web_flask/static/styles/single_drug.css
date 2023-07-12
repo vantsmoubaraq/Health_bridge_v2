@@ -468,7 +468,7 @@ p {
 
   @media screen and (max-width: 768px) {
     .card {
-      width: 45%;
+      width: 95%;
     }
   }
   
@@ -529,5 +529,47 @@ p {
     border-left: 1px solid gainsboro;
     width: 150px;
   }
+
+  /* Media query for small screens */
+@media only screen and (max-width: 767px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .left-side-img3 {
+    width: 50px;
+    height: 30px;
+  }
+
+  .patients, .pharmacy, .appointments {
+    margin-left: -30px;
+  }
+
+  .user-photo {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Media query for extra small screens */
+@media only screen and (max-width: 479px) {
+  .left-side-img3 {
+    height: 40px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .user-photo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .patients, .pharmacy, .appointments {
+    font-size: 20px;
+    margin-left: -30px;
+  }
+}
 
   

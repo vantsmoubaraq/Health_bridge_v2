@@ -71,33 +71,36 @@
       a{
         text-decoration: none;
       }
+
+    @media (max-width: 767px) {
+    table tbody tr {
+      display: block;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+    }
+
+    table tbody td {
+      display: block;
+      text-align: left;
+      padding: 10px;
+    }
+  }
   
     </style>
   </head>
 <body>
-    <header class="head">
-        <nav >
-            <img
-                src="https://assets.mockflow.com/app/wireframepro/company/C06cebf9edc514714a50cc24918f5b156/projects/MYQX0R3SPob/images/thumbnails/Me6d09e02eed3c78df2c2c0e04e0817c21678708408116"
-                alt="photo"
-                class="left-side-img3"
-            />
-            <h1 class="title">HealthBridge</h1>
-            <ul>
-                <li><a class="patients" href="/">Patients</a></li>
-                <li><a class="pharmacy" href="/pharmacy">Pharmacy</a></li>
-                <li><a class="appointments" href="#Appointments">Appointments</a></li>
-            </ul>
-        </nav>
-    </header>
+  <script type="module" src="../static/scripts/header.js"></script>
+
+  <my-header></my-header>
+  
     <section class="main2">
         
 
       <h2><a class="bread_crumb" href="/">Patients /</a></h2><h2><a class="bread_crumb" href="/single/{{ patient.id }}">{{ patient.name }} /</a></h2><h3>Prescriptions</h3>     
-      <a href="/prescriptions_page/{{ patient.id }}" id="edit"><button class="btn1" id="create">CREATE</button></a>
+      <button class="btn1" id="create"><a href="/prescriptions_page/{{ patient.id }}" id="edit">CREATE</a></button>
   </section>
     
-    <table>
+    <table id="responsive-table">
       <thead>
         <tr>
           <th></th>
@@ -112,8 +115,8 @@
       <tbody>
         {% for prescription in prescriptions %}
         <tr>
-          <td>{{ prescription.id }}</td>
           <td></td>
+          <td>{{ prescription.id }}</td>
           <td><a href="http://127.0.0.1:5000/single_prescription/{{ prescription.id }}">{{ patient.name }}</a></td>
           <td>{{ prescription.created_at }}</td>
           <td>{{ user.name }}</td>
@@ -127,4 +130,45 @@
   </body>
   <script type="text/javascript" src="../static/scripts/create_prescription.js"></script>
   <script type="text/javascript" src="../static/scripts/delete_prescription.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+     $(document).ready(function() {
+    // Check if viewport is within mobile range
+    function isMobileView() {
+      return $(window).width() <= 767;
+    }
+
+    // Convert table to responsive layout
+    function convertTable() {
+      var table = $('#responsive-table');
+      var tableRows = table.find('tr');
+
+      tableRows.each(function() {
+        var row = $(this);
+        var rowData = row.find('td');
+
+        rowData.each(function(index) {
+          var cell = $(this);
+          var columnHeader = table.find('th').eq(index).text();
+
+          cell.attr('data-label', columnHeader);
+        });
+      });
+    }
+
+    // Check if viewport is within mobile range on page load
+    if (isMobileView()) {
+      convertTable();
+    }
+
+    // Recalculate table on window resize
+    $(window).resize(function() {
+      if (isMobileView()) {
+        convertTable();
+      } else {
+        $('#responsive-table td').removeAttr('data-label');
+      }
+    });
+  });
+  </script>
 </html>
