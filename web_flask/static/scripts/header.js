@@ -27,8 +27,8 @@ class MyHeader extends HTMLElement {
 
             <!-- Hidden navigation elements -->
             <ul id="hiddenNav" class="hidden-nav">
-                <li><a href="#">Procurement</a></li>
-                <li><a href="#">Services</a></li>
+                <li><a href="/procurements">Procurement</a></li>
+                <li><a href="/services">Services</a></li>
                 <li><a href="#">Chat AI</a></li>
                 <li><a href="#">Messaging</a></li>
             </ul>
