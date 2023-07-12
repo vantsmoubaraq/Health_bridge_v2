@@ -16,3 +16,5 @@ class Drug(BaseModel, Base):
         name = Column(String(128), nullable=False)
         quantity = Column(Integer, nullable=False, default=0)
         price = Column(Integer, nullable=True)
+
+        procurements = relationship("Procurement", backref="drug_procurements")
