@@ -10,40 +10,37 @@ body{
     overflow-x: hidden;
     font-family: 'Rubik', sans-serif;
     font-size: 1rem;
+    height: 100%;
+    background-color: rgb(3, 68, 11);
 }
 
-/*.phonemock{
-    height: 650px;
-    margin-top: 50px;
-    border-radius: 20px;
-    
-    width: 75%;
-    margin-left: -40px;
-    position: relative;
-    z-index: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: translateX(50px);
-    
-}*/
+
 
 .col1{
-    width: 100%;
-    
+    width: 70%;
+    /*background-image: url(../images/illustration-working.svg);*/
+    height: 100%;
     background-size: 25% 50%;
     background-repeat: no-repeat;
     background-position: right;
     padding: 10px 20px;
+    margin-top: 130px;
 }
 
 .inner{
     height: 95%;
-    width: 100%;
+    width: 90%;
     position: relative;
-    background-color: rgba(212, 212, 212, 0.42);
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
+}
 
+#illus{
+    position: fixed;
+    top: 160px;
+    right: 60px;
+    width: 400px;
+    height:auto;
 }
 
 .top{
@@ -51,8 +48,7 @@ body{
     width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    /*background-image: linear-gradient(to right, hsla(270, 2%, 26%, 0.777), hsla(240, 2%, 36%, 0.724));*/
-    background-color: #db24ae;
+    background-image: linear-gradient(to right, hsla(96, 100%, 61%, 0.777), hsla(143, 89%, 46%, 0.724));
     position: relative;
 }
 
@@ -79,7 +75,6 @@ body{
     width: 100%;
     height: 100%;
     padding: 50px 10px;
-    margin-top: 55px;
 }
 
 .profilecol1{
@@ -124,10 +119,10 @@ body{
 
 .outgoing{
     text-align: left;
-    width: 50%;
+    width: 90%;
     font-size: 1rem;
     border-radius: 20px;
-    background-color: #ffffff;
+    background-color: #95e49b;
     color: hsla(0, 0%, 24%, 0.777);
     padding: 10px 10px;
     margin: 10px 10px;
@@ -141,7 +136,7 @@ body{
 
 .incoming{
     text-align: left;
-    width: 50%;
+    width: 90%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -189,7 +184,7 @@ body{
 }
 
 .message::placeholder{
-    font-size: .8rem;
+    font-size: 1rem;
 }
 
 

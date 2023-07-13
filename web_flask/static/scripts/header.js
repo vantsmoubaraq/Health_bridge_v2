@@ -37,7 +37,7 @@ class MyHeader extends HTMLElement {
             <div id="buttonSection" class="button-section">
                 <!-- Toggle button for hidden navigation elements -->
                 <button class="navbar-toggler" onclick="toggleHiddenNav()">
-                    <img src="/static/images/menu-icon.svg" alt="icon-menu"  />
+                    <img src="/static/images/menu-icon.svg" id = "tog" alt="icon-menu"  />
                 </button>
             </div>
   
@@ -299,6 +299,8 @@ class MyHeader extends HTMLElement {
         /* Styling for the user photo */
         .user-photo {
           cursor: pointer;
+          width: 45px;
+          height: auto;
         }
   
         /* Styling for the edit mode */
@@ -416,6 +418,11 @@ class MyHeader extends HTMLElement {
             .button-section {
                 display: block;
             }
+        }
+
+        #tog{
+          width: 45px;
+          height; auto;
         }
 
         

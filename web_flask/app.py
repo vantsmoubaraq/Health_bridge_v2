@@ -201,7 +201,7 @@ def handle_message(data):
         #new_message.save()
         send(data, broadcast=True)
     #socketio.emit('message', data, broadcast=True)
-
+"""
 @socketio.on('connect')
 def on_connect():
     all_messages = list(models.storage.all("Message").values())
@@ -212,7 +212,7 @@ def on_connect():
 
     # Convert messages to a suitable format if needed
     # Emit the message history to the connected client
-    send(current_messages)
+    send(current_messages)"""
 
 
 @app.route("/", strict_slashes=False)
