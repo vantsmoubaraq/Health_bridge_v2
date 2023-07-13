@@ -188,8 +188,8 @@ def passwd():
 @app.route('/chat')
 @login_required
 def index():
-    name = current_user.name
-    return render_template('messaging.html', name=name)
+    user = current_user
+    return render_template('messaging.html', user=user)
 
 @socketio.on('message')
 def handle_message(data):
@@ -200,7 +200,7 @@ def handle_message(data):
         send(data, broadcast=True)
     #socketio.emit('message', data, broadcast=True)
 
-"""@socketio.on('connect')
+@socketio.on('connect')
 def on_connect():
     all_messages = list(models.storage.all("Message").values())
     current_messages = []
@@ -210,7 +210,7 @@ def on_connect():
 
     # Convert messages to a suitable format if needed
     # Emit the message history to the connected client
-    send(current_messages)"""
+    send(current_messages)
 
 
 @app.route("/", strict_slashes=False)
@@ -682,9 +682,11 @@ def invitees(all_events, headers):
     return(invitee_details)
 
 @app.route("/AI", strict_slashes=False)
+@login_required
 def chat():
     """Powers chat app"""
-    return render_template("chatAI.html")
+    user = current_user
+    return render_template("chatAI.html", user=user)
 
 
 if __name__ == "__main__":

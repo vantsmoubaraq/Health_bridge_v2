@@ -14,7 +14,7 @@ def chat():
     # Call the ChatGPT API
     response = call_chatgpt_api(message)
 
-    return jsonify({'response': response})
+    return jsonify(response)
 
 def call_chatgpt_api(message):
     api_key = getenv("API_KEY")
@@ -35,4 +35,4 @@ def call_chatgpt_api(message):
     response_data = response.json()
 
     return response_data["choices"][0]["message"]["content"]
-print(call_chatgpt_api("what is a school"))
+#print(call_chatgpt_api("what is a school"))

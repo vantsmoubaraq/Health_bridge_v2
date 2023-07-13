@@ -99,38 +99,33 @@
       <h2><a class="bread_crumb" href="/">Patients /</a></h2><h2><a class="bread_crumb" href="/single/{{ patient.id }}">{{ patient.name }} /</a></h2><h3>Prescriptions</h3>     
       <button class="btn1" id="create"><a href="/prescriptions_page/{{ patient.id }}" id="edit">CREATE</a></button>
   </section>
-    
-    <table id="responsive-table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Prescription #</th>
-          <th>Patient</th>
-          <th>Prescription Date</th>
-          <th>Physician</th>
-          <th>Pharmacy</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for prescription in prescriptions %}
-        <tr>
-          <td></td>
-<<<<<<< HEAD
-          <td><a href="http://127.0.0.1:5000/single_prescription/{{ prescription.id }}/{{ patient.id }}">{{ patient.name }}</a></td>
-=======
-          <td>{{ prescription.id }}</td>
-          <td><a href="http://127.0.0.1:5000/single_prescription/{{ prescription.id }}">{{ patient.name }}</a></td>
->>>>>>> 65c84c4d8806ddec8fe1ae784963c651fb2ade3a
-          <td>{{ prescription.created_at }}</td>
-          <td>{{ user.name }}</td>
-          <td>HealthBridge Pharmacy</td>
-          <td><a class="delete-icon" href="#"><i class="fa fa-trash"></i></a></td>
-        </tr>
-        {% endfor %}
-        
-      </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Prescription #</th>
+        <th>Patient</th>
+        <th>Prescription Date</th>
+        <th>Physician</th>
+        <th>Pharmacy</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for prescription in prescriptions %}
+      <tr>
+        <td>{{ prescription.id }}</td>
+        <td></td>
+        <td><a href="http://127.0.0.1:5000/single_prescription/{{ prescription.id }}/{{ patient.id }}">{{ patient.name }}</a></td>
+        <td>{{ prescription.created_at }}</td>
+        <td>{{ user.name }}</td>
+        <td>HealthBridge Pharmacy</td>
+        <td><a class="delete-icon" href="#"><i class="fa fa-trash"></i></a></td>
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
   </body>
   <script type="text/javascript" src="../static/scripts/create_prescription.js"></script>
   <script type="text/javascript" src="../static/scripts/delete_prescription.js"></script>
