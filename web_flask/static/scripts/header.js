@@ -29,20 +29,15 @@ class MyHeader extends HTMLElement {
             <ul id="hiddenNav" class="hidden-nav">
                 <li><a href="/procurements">Procurement</a></li>
                 <li><a href="/services">Services</a></li>
-<<<<<<< HEAD
                 <li><a href="/AI">Chat AI</a></li>
                 <li><a href="/chat">Discussion</a></li>
-=======
-                <li><a href="/chat">Chat AI</a></li>
-                <li><a href="/message">Messaging</a></li>
->>>>>>> 7551cb7337ff6441aa6cb6b9f3e5949bee68f2fe
             </ul>
             </nav>
 
             <div id="buttonSection" class="button-section">
                 <!-- Toggle button for hidden navigation elements -->
                 <button class="navbar-toggler" onclick="toggleHiddenNav()">
-                    <img src="../static/images/menu-icon.svg" alt="icon-menu"  />
+                    <img src="../static/images/menu-icon.svg" id = "tog" alt="icon-menu"  />
                 </button>
             </div>
   
@@ -303,6 +298,8 @@ class MyHeader extends HTMLElement {
         /* Styling for the user photo */
         .user-photo {
           cursor: pointer;
+          width: 45px;
+          height: auto;
         }
   
         /* Styling for the edit mode */
@@ -420,6 +417,11 @@ class MyHeader extends HTMLElement {
             .button-section {
                 display: block;
             }
+        }
+
+        #tog{
+          width: 45px;
+          height; auto;
         }
 
         
