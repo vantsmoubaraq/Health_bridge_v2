@@ -237,10 +237,10 @@ input[type="text"] {
   .prof {
     float: right;
     position: absolute;
-    margin-left: 90%;
+    
    }
    .profile {
-    margin-left: -120px;
+    
     margin-top: 0px;
     position: absolute;
     padding: 0px;
@@ -285,7 +285,7 @@ input[type="text"] {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
-  }
+  }*/
 
   /* Styling for the user photo */
   .user-photo {
@@ -358,3 +358,46 @@ input[type="text"] {
       width: 100%;
     }
   }
+
+  
+/* Media query for small screens */
+@media only screen and (max-width: 767px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .left-side-img3 {
+    width: 50px;
+    height: 30px;
+  }
+
+  .patients, .pharmacy, .appointments {
+    margin-left: -30px;
+  }
+
+  .user-photo {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Media query for extra small screens */
+@media only screen and (max-width: 479px) {
+  .left-side-img3 {
+    height: 40px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .user-photo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .patients, .pharmacy, .appointments {
+    font-size: 20px;
+    margin-left: -30px;
+  }
+}
