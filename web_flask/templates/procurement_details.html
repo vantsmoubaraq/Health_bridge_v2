@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="../static/styles/single_patient.css" />
     <meta charset="UTF-8">
-    <title>Procurement List</title>
+    <title>Procurement Details</title>
     <style>
       /* Table style */
       table {
@@ -50,35 +50,6 @@
         background-color: #f9f9f9;
         font-family: Arial, sans-serif;
       }
-      .delete-icon {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        background-image: url('https://assets.mockflow.com/app/wireframepro/svg/default/trash.svg');
-        background-size: cover;
-        cursor: pointer;
-      }
-
-      /* Custom styles */
-      .main2 {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
-      }
-
-      input[type="text"] {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        width: 500px;
-        font-size: 16px;
-        margin-left: 0%;
-        height: 35px;
-      }
-
-      .btn1 {
-        margin-top: -5px;
-      }
 
       .btn2 {
         margin-left: 15px;
@@ -91,12 +62,6 @@
         background-color: hsl(120, 64%, 35%);
         font-family: "Montserrat", sans-serif;
         font-weight: 200;
-      }
-
-      #btn3 {
-        display: inline-block;
-        margin-top: -40px;
-        margin-left: 80%;
       }
 
       #btn4 {
@@ -119,30 +84,26 @@
         color: rgb(5, 121, 5);
         border: 2px solid rgb(5, 121, 5);
       }
-
-      .drugs {
-        display: none;
-        background-color: #f3f3f3;
-        padding: 10px;
-      }
-
-      .toggle-drugs {
-        cursor: pointer;
-        color: blue;
-      }
-      a {
-        text-decoration: none;
-        color: #27db3f;
-      }
     </style>
 </head>
 <body>
-  <script type="module" src="../static/scripts/header.js"></script>
-
-  <my-header></my-header>
+    <header class="head">
+        <nav>
+            <img
+                src="https://assets.mockflow.com/app/wireframepro/company/C06cebf9edc514714a50cc24918f5b156/projects/MYQX0R3SPob/images/thumbnails/Me6d09e02eed3c78df2c2c0e04e0817c21678708408116"
+                alt="photo"
+                class="left-side-img3"
+            />
+            <h1 class="title">HealthBridge</h1>
+            <ul>
+                <li><a class="patients" href="/">Patients</a></li>
+                <li><a class="pharmacy" href="/pharmacy">Pharmacy</a></li>
+                <li><a class="appointments" href="#Appointments">Appointments</a></li>
+            </ul>
+        </nav>
+    </header>
     <section class="main2">
-        <h2>Procurements</h2>
-        <a id="btn4" href="/create_procurement"><button class="btn1">Create</button></a>
+        <h2>Procurement Details</h2>
     </section>
     <table>
       <thead>
@@ -153,16 +114,34 @@
           </tr>
       </thead>
       <tbody>
-          {% set seen_procurements = [] %}
+          {% set seen_procurement_ids = [] %}
           {% for procurement in procurements %}
-              {% if procurement.procurement_id not in seen_procurements %}
+              {% if procurement.procurement_id not in seen_procurement_ids %}
                   <tr>
                       <td>{{ procurement.vendor_name }}</td>
-                      <td><a href="/procurements/{{ procurement.procurement_id }}">{{ procurement.procurement_id }}</a></td>
+                      <td>{{ procurement.procurement_id }}</td>
                       <td>{{ procurement.created_at }}</td>
                   </tr>
-                  {% set _ = seen_procurements.append(procurement.procurement_id) %}
+                  {% set _ = seen_procurement_ids.append(procurement.procurement_id) %}
               {% endif %}
+          {% endfor %}
+      </tbody>
+    </table>
+    <table>
+      <thead>
+          <tr>
+              <th>Drug Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for procurement in procurements %}
+              <tr>
+                  <td>{{ procurement.name }}</td>
+                  <td>{{ procurement.quantity }}</td>
+                  <td>{{ procurement.price }}</td>
+              </tr>
           {% endfor %}
       </tbody>
     </table>

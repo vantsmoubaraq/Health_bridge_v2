@@ -2,12 +2,14 @@
 
 """Module populates all views"""
 from flask import Flask, render_template, request, session, redirect, url_for, flash, abort, jsonify
+from sqlalchemy.orm.exc import NoResultFound
 from models.patients import Patient
 import models
 from models.base_model import BaseModel
 from models.drugs import Drug
 from models.users import User
 import random
+from models.procurements import Procurement
 from models.payments import Payment
 from models.services import Service
 from models.messages import Message
@@ -543,15 +545,6 @@ def edit_service(service_id):
     service = models.storage.get("Service", service_id)
     return render_template("service_edit_form.html", service=service)
 
-@app.route("/delete_service/<string:service_id>", strict_slashes=False)
-def delete_service(service_id):
-    """Deletes a service"""
-    service = models.storage.get("Service", service_id)
-    if service:
-        models.storage.delete(service)
-        models.storage.save()
-    return redirect("/services")
-
 @app.route("/create_service", strict_slashes=False)
 @login_required
 def create_service():
@@ -585,6 +578,20 @@ def get_procurements():
     procurements = sorted(list(models.storage.all("Procurement").values()),
                           key=lambda p: p.created_at)
     return render_template("procurements.html", procurements=procurements)
+
+@app.route('/procurements/<procurement_id>')
+def show_procurement_details(procurement_id):
+    procurements = models.storage.all("Procurement").values()
+    procurements_with_id = [procurement.to_dict() for procurement in procurements if procurement.procurement_id == procurement_id]
+    if not procurements_with_id:
+        abort(404)
+    return render_template("procurement_details.html", procurements=procurements_with_id)
+
+@app.route("/create_procurement", strict_slashes=False)
+@login_required
+def create_procurement():
+    """Displays service creation form"""
+    return render_template("procurement_create.html")
 
 @app.route("/prescriptions_page/<string:patient_id>", strict_slashes=False)
 @login_required
@@ -636,6 +643,7 @@ def edit_prescribed(drug_id, prescription_id=None, patient_id=None):
         abort(404)
     return render_template("edit_pres.html", drug=drug, drugs=drugs, actual_drug=actual_drug)
     
+<<<<<<< HEAD
 @app.route("/invoice_service/<string:invoice_id>", strict_slashes=False)
 def add_service_invoice(invoice_id):
     """adds service to invoice"""
@@ -647,6 +655,8 @@ def add_service_invoice(invoice_id):
         abort(404)
     return render_template("invoice_service_form.html", invoice=invoice, services=services)
 
+=======
+>>>>>>> da0be1074a85ebee1c07c8c2fd3f9244264a961b
 def events(response):
     """returns all events in last 7 days"""
     event_details = []
