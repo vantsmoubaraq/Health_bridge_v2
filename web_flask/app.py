@@ -643,7 +643,6 @@ def edit_prescribed(drug_id, prescription_id=None, patient_id=None):
         abort(404)
     return render_template("edit_pres.html", drug=drug, drugs=drugs, actual_drug=actual_drug)
     
-<<<<<<< HEAD
 @app.route("/invoice_service/<string:invoice_id>", strict_slashes=False)
 def add_service_invoice(invoice_id):
     """adds service to invoice"""
@@ -655,8 +654,6 @@ def add_service_invoice(invoice_id):
         abort(404)
     return render_template("invoice_service_form.html", invoice=invoice, services=services)
 
-=======
->>>>>>> da0be1074a85ebee1c07c8c2fd3f9244264a961b
 def events(response):
     """returns all events in last 7 days"""
     event_details = []

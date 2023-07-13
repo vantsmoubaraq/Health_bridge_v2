@@ -26,29 +26,24 @@ class MyHeader extends HTMLElement {
             
 
             <!-- Hidden navigation elements -->
-            <ul id="hiddenNav" class="hidden-nav">
+            <ul id="hiddenNav" class="hidden-nav" >
                 <li><a href="/procurements">Procurement</a></li>
                 <li><a href="/services">Services</a></li>
-<<<<<<< HEAD
                 <li><a href="/AI">Chat AI</a></li>
                 <li><a href="/chat">Discussion</a></li>
-=======
-                <li><a href="/chat">Chat AI</a></li>
-                <li><a href="/message">Messaging</a></li>
->>>>>>> 7551cb7337ff6441aa6cb6b9f3e5949bee68f2fe
             </ul>
             </nav>
 
             <div id="buttonSection" class="button-section">
                 <!-- Toggle button for hidden navigation elements -->
                 <button class="navbar-toggler" onclick="toggleHiddenNav()">
-                    <img src="../static/images/menu-icon.svg" alt="icon-menu"  />
+                    <img src="/static/images/menu-icon.svg" alt="icon-menu"  />
                 </button>
             </div>
   
           <div class="prof" id="homepage">
             <div style="text-align: center;">
-              <img id="userPhoto" src="../static/images/person_FILL0_wght400_GRAD0_opsz48.png" alt="User Photo" class="user-photo" onclick="showProfile()" />
+              <img id="userPhoto" src="/static/images/person_FILL0_wght400_GRAD0_opsz48.png" alt="User Photo" class="user-photo" onclick="showProfile()" />
               <h1 class="patient-name">
                 <script>
                     // Assign the user name to a JavaScript variable
@@ -61,16 +56,18 @@ class MyHeader extends HTMLElement {
             <div id="profileSection" style="display: none;">
               <div class="profile">
                 <div style="display: flex; margin-top: 10px;">
-                    <img src="../static/images/home-icon.svg" alt="home" style="margin-top: -10px;" />
-                    <h2><a href="/" style="text-decoration: none; font-size: 25px; margin-left: -15px; ">Home<a></h2>
+                    <img src="/static/images/home-icon.svg" alt="home" style="margin-top: -10px; width: 50px; height: 50px;" />
+                    <h2><a href="/" style="text-decoration: none; font-size: 20px; margin-left: -15px; color: black; font-weight: lighter; ">Home<a></h2>
                 </div>
-                <div style="display: flex;">
-                    <img src="../static/images/person_FILL0_wght400_GRAD0_opsz48.png" alt="User Photo" class="user-photo" style="margin-top: -20px;" />
-                    <h2><a href="/" style="text-decoration: none; font-size: 25px; margin-left: -20px; ">Profile<a></h2>
+               
+                <div style="display: flex; margin-top: -25px;">
+                    <img src="/static/images/person_FILL0_wght400_GRAD0_opsz48.png" alt="User Photo" class="user-photo" style="margin-top: -16px; width: 50px; height: 50px; margin-left: -3px;" />
+                    <h2><a href="/" style="text-decoration: none; font-size: 20px; margin-left: -30px; color: black; font-weight: lighter; ">Profile<a></h2>
                 </div>
-                <div style="display: flex; margin-top: -20px;">
-                    <img src="../static/images/logout-icon.svg" style="margin-top: -20px;" />
-                    <h3 class="button1" id="logoutButton" style="margin-top: -20px; margin-left: -10px;"><a href="http://127.0.0.1:5000/logout" style="text-decoration: none; margin-left: -10px;">Logout</a></h3>
+                
+                <div style="display: flex; margin-top: -35px;">
+                    <img src="/static/images/logout-icon.svg" style="margin-top: -10px; width: 40px; height: 40px;" />
+                    <h3 class="button1" id="logoutButton" style="margin-top: px; margin-left: -20px; font-weight: lighter;"><a href="http://127.0.0.1:5000/logout" style="text-decoration: none; margin-left: -20px; font-size: 20px;">Logout</a></h3>
                 </div>
               </div>
             </div>
@@ -137,6 +134,7 @@ class MyHeader extends HTMLElement {
         .button-section {
             display: flex;
             justify-content: space-around;
+            back-ground: hsl(140, 84%, 42%);
             top: -13%;
             align-items: center;
             position: relative;
@@ -164,11 +162,14 @@ class MyHeader extends HTMLElement {
 
           .show {
             display: block;
+            background-color: hsl(140, 84%, 42%);
+            width: fit-content;
+            margin-left: 50%;
         }
 
           .hidden-nav a{
             text-decoration: none;
-            color: hsl(140, 84%, 42%);
+            color: white;
             font-size: 19px;
             font-weight: bold;
             font-family: 'Arial Narrow', Arial, sans-serif;
@@ -250,12 +251,12 @@ class MyHeader extends HTMLElement {
           width: fit-content;
           height: fit-content;
           border-radius: 50%;
-          margin-left: -120px;
+          margin-left: -10px;
           margin-top: 0px;
           position: absolute;
           padding: 0px;
-          border: 1px solid #ccc;
-          background-color: #fffefe;
+          border: 1px solid hsl(140, 84%, 42%, 0.8);
+          background-color: white;
           border-radius: 5px;
         }
 
@@ -264,12 +265,7 @@ class MyHeader extends HTMLElement {
             align-items: inline-flex;
         }
   
-        .profile h2 {
-          text-align: center;
-          margin-bottom: 2px;
-          margin-top: -5px;
-          color: #20b140;
-        }
+        
   
         .profile label {
           display: block;

@@ -6,12 +6,14 @@ document.getElementById('sign_up').addEventListener('click', function(e) {
     var password = document.getElementById('password1').value;
     var name = document.getElementById('name1').value;
     var gender = document.getElementById('gender1').value;
+    var role = document.getElementById('role1').value;
     // Create an object with the form data
     var formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
     formData.append("name", name);
     formData.append("gender", gender);
+    formData.append("role", role);
 
     // Make a POST request to the API endpoint
     fetch('http://127.0.0.1:5000/signup', {
