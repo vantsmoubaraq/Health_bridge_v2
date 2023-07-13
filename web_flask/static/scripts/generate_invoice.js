@@ -1,9 +1,9 @@
 const send = document.getElementById("send");
-var patient = window.location.pathname.split('/')[2];
+var patient = window.location.pathname.split('/')[3];
 
 send.addEventListener("click", () => {
     const prescription_id = document.getElementById("p_id").textContent;
-    fetch(`http://127.0.0.1:5001/api/v1//prescription_invoice/${prescription_id}`, {
+    fetch(`http://127.0.0.1:5001/api/v1/prescription_invoice/${prescription_id}`, {
         method: "POST",
     }).then(
         (response) => response.json()
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     actionButton.addEventListener('click', function(event) {
         var id = document.getElementById("p_id").textContent;
         var route = `http://127.0.0.1:5001/api/v1/prescription/${id}`;
-        var patient_id = window.location.pathname.split('/')[2];
+        var patient_id = window.location.pathname.split('/')[3];
         
         fetch(route, {
             method: 'DELETE'

@@ -4,7 +4,7 @@
         <title>Single patient prescription Page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/styles/prescriptions.css" />
+        <link rel="stylesheet" href="/static/styles/prescriptions.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         
 </head>
@@ -15,14 +15,11 @@
     <my-header></my-header>
 
     <section class="main2">
-        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><h4>Prescriptions</h4>
+        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><a href="http://127.0.0.1:5000/prescriptions/{{ patient.id }}"><h4 id="pres">Prescriptions</h4></a>
         <button id="action">DISCARD</button>
-        
-        <a href="" id="save"><button class="btn1">SAVE</button></a>
     </section>
     <div class="line">
-        <button class="btn">CONSULTANCY INVOICE</button>
-        <button class="btn"><a>SEND TO PHARMACY</a></button> 
+        <button class="btn" id="send"><a>GENERATE INVOICE</a></button> 
     </div>
 
     <main class="main">
@@ -59,7 +56,7 @@
                 <!-- Card Popup HTML -->
                 <div id="cardPopup" class="hidden card-popup">
                     <div class="popup-content">
-                        <h2 class="text-2xl mb-4">Create: New Prescription</h2>
+                        <h2 class="text-2xl mb-4">Edit: Prescription</h2>
 
                         <div class="container">
                             <div class="section-wrapper1">
@@ -78,28 +75,9 @@
                                         {% endfor %}
                                     </select><br>
                                     <p>{{ patient.created_at }}</p>
-                                    <p>{{ patient.name }}</p>
+                                    <p >{{ patient.name }}</p>
                                 </section>
                             </div>
-
-                            <div class="section-wrapper2">
-                                <section class="section">
-                                    <h3>Administration Route</h3>
-                                    <h3>End of treatment</h3>
-                                </section>
-                            
-                                <div class="vertical-line"></div>
-                            
-                                <section class="section">
-                                    <p id="selected"></p>
-                                    <select id="physicianDropdown">
-                                        <option value="example1">Example 1</option>
-                                        <option value="example2">Example 2</option>
-                                        <option value="example3">Example 3</option>
-                                    </select>
-                                </section>
-                            </div>
-                        </div>
 
                         <hr class="section-divider">
 
@@ -108,64 +86,99 @@
                             <div class="section-wrapper1">
                                 <section class="section">
                                     <h3>Dose</h3>
+                                    <h3>Frequency</h3>
+                                    <h3>Number of days</h3>
                                     
                                 </section>
                             
                                 <div class="vertical-line"></div>
-                            
-                                <section class="section">
-                                <input type="number" id="dose" placeholder="dose">
-                                </section>
+                                <form class="section" id="yourFormId">
+                                <input type="number" id="dose" placeholder="dose in mg, mL">
+                                <input type="number" id="Frequency" placeholder="Frequency">
+                                <input type="number" id="days" placeholder="days">
+                                <button id="save" type="submit" class="btn3">Save</button>
+                                </form>
                             </div>
+                    </div>
+                </div>
+                <div id="cardPopup1" class="hidden card-popup">
+                    <div class="popup-content">
+                        <h2 class="text-2xl mb-4">Edit: Prescription</h2>
 
-                            <h2>Common Dosage</h2>
-
-                            <div class="section-wrapper2">
-                                
+                        <div class="container">
+                            <div class="section-wrapper1">
                                 <section class="section">
-                                    <h3>Frequency</h3>
-                                    <h3>Number of days</h3>
+                                    <h3>Medicines</h3>
+                                    <h3>Start of treatment</h3>
+                                    <h3>Patient</h3>
                                 </section>
                             
                                 <div class="vertical-line"></div>
                             
                                 <section class="section">
-                                    <input type="number" id="Frequency" placeholder="Frequency">
-                                    <input type="number" id="days" placeholder="days">
+                                    <select id="drugs1">
+                                        {% for drug in drugs %}
+                                        <option id="drug1" value="{{ drug.id }}"">{{ drug.name }}</option>
+                                        {% endfor %}
+                                    </select><br>
+                                    <p>{{ patient.created_at }}</p>
+                                    <p >{{ patient.name }}</p>
                                 </section>
                             </div>
-                        </div>
 
                         <hr class="section-divider">
+
+                        <div class="container">
+                            <h2>Dosage</h2>
+                            <div class="section-wrapper1">
+                                <section class="section">
+                                    <h3>Dose</h3>
+                                    <h3>Frequency</h3>
+                                    <h3>Number of days</h3>
+                                    
+                                </section>
+                            
+                                <div class="vertical-line"></div>
+                                <form class="section" id="yourFormId1">
+                                <input type="number" id="dose1" placeholder="dose in mg, mL">
+                                <input type="number" id="Frequency1" placeholder="Frequency">
+                                <input type="number" id="days1" placeholder="days">
+                                <button id="save1" type="submit" class="btn3">Save</button>
+                                </form>
+                            </div>
                     </div>
                 </div>
             </section>
             <!--<h4>Prescription Records</h4>-->
-            <table id="table">
+            <table id="medicines">
               <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Medicines</th>
                     <th>Dose</th>
                   <th>Frequency</th>
                   <th>Treatment duration</th>
-                  <th>Prescription Date</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {% for drug in prescribed_drugs %}
                 <tr>
+                    <td>{{ drug.id }}</td>
                   <td>{{ drug.drug_name }}</td>
                     <td>{{ drug.dosage }} mg</td>
                   <td>{{ drug.frequency }} times</td>
                   <td>{{ drug.days }} days</td>
-                  <td>{{ drug.created_at }}</td>
+                  <td><a class="delete-icon" href="#"><i class="fa fa-trash"></i></a></td>
                 </tr>
-                 {% endfor %}
+                {% endfor %}
                 </tbody>
             </table>
         </section>
+        <div id="flashMessage" class="flash-message"></div>
     </main>
 </body>
-<script src="../static/scripts/patients_prescriptions.js"></script>
-<script src="../static/scripts/prescriptions.js"></script>
+<script src="/static/scripts/edit_prescriptions.js"></script>
+<script src="/static/scripts/prescriptions.js"></script>
+<script src="/static/scripts/generate_invoice.js"></script>
 </html>

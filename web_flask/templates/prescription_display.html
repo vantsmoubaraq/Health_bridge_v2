@@ -4,20 +4,20 @@
         <title>Single patient prescription Page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/styles/prescriptions.css" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="/static/styles/prescriptions.css" />
+        
         
 </head>
 
 <body>
-    <script type="module" src="../static/scripts/header.js"></script>
+    <script type="module" src="/static/scripts/header.js"></script>
 
     <my-header></my-header>
 
     <section class="main2">
-        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><h4>Prescriptions</h4>
+        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><h4><a href="http://127.0.0.1:5000/prescriptions/{{ patient.id }}" id="pres">Prescriptions</a></h4>
         
-        <a href="http://127.0.0.1:5000/prescriptions_edit/{{ prescription.id }}" id="edit"><button class="btn1">EDIT</button></a>
+        <a href="http://127.0.0.1:5000/prescriptions_edit/{{ prescription.id }}/{{ patient.id }}" id="edit"><button class="btn1">EDIT</button></a>
     </section>
     <div class="line">
         <button class="btn" id="send"><a>GENERATE INVOICE</a></button> 
@@ -64,7 +64,7 @@
                 {% for drug in prescribed_drugs %}
                 <tr>
                   <td>{{ drug.drug_name }}</td>
-                    <td>{{ drug.dosage }} mg</td>
+                    <td>{{ drug.dosage }} mg/mL</td>
                   <td>{{ drug.frequency }} times</td>
                   <td>{{ drug.days }} days</td>
                   <td>{{ drug.created_at }}</td>
@@ -76,5 +76,5 @@
         <div id="flashMessage" class="flash-message"></div>
     </main>
 </body>
-<script src="../static/scripts/create_prescription_invoice.js"></script>
+<script src="/static/scripts/generate_invoice.js"></script>
 </html>

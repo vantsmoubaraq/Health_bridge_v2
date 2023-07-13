@@ -104,9 +104,9 @@
         <tr>
           <td>{{ pay.created_at }}</td>
           <td><a href="/edit_payment/{{ pay.id }}">{{ patient.name }}</a></td>
-          <td>{{ pay.amount }}</td>
+          <td>{{ pay.total_amount }}</td>
           <td>{{ pay.paid }} </td>
-          <td>{% set balance = pay.amount - pay.paid %} {{ balance }}</td>
+          <td>{% set balance = pay.total_amount - pay.paid %} {{ balance }}</td>
           <td class="transaction">{{ pay.id }}</td>
           <td><a class="delete-icon" id="pay" href="#"><i class="fa fa-trash"></i></a></td>
         </tr>

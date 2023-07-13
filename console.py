@@ -13,13 +13,14 @@ from models.prescribed_drugs import Prescribed_drug
 from models.engine.db_storage import DB_Storage
 from models.deliverables import Deliverable
 from models.invoices import Invoice
+from models.invoice_services import Invoiced_services
 from models.messages import Message
 import cmd
 import models
 from colorama import init, Fore, Back, Style
 
 classes = {"Patient": Patient, "Drug": Drug, "Payment": Payment, "User": User,
-           "Prescription": Prescription, "Invoice": Invoice, "Prescribed_drug": Prescribed_drug, "Deliverable": Deliverable, "Message": Message}
+           "Prescription": Prescription, "Invoice": Invoice, "Prescribed_drug": Prescribed_drug, "Deliverable": Deliverable, "Message": Message, "Invoiced_services": Invoiced_services}
 
 
 class Console(cmd.Cmd):
