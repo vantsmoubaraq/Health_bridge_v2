@@ -20,6 +20,7 @@ from models.messages import Message
 from models.procurements import Procurement
 from models.invoice_services import Invoiced_services
 
+
 classes = {"Procurement": Procurement,"Patient": Patient, "Service": Service, "Drug": Drug, "Payment": Payment, "patient_drug": patient_drug, "User": User,
             "Prescription": Prescription, "Invoice": Invoice, "Prescribed_drug": Prescribed_drug, "Deliverable": Deliverable, "Message": Message, "Invoiced_services": Invoiced_services}
 
