@@ -84,10 +84,10 @@ function addRow(dose, frequency, days, drug_name) {
 }
 
 
-function resetForm() {
+/*function resetForm() {
     const form = document.getElementById('yourFormId');
     form.reset();
-}
+}*/
 
 document.addEventListener('DOMContentLoaded', function() {
     var cardPopup1 = document.getElementById('cardPopup1');

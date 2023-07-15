@@ -71,20 +71,38 @@
       a{
         text-decoration: none;
       }
-  
+      #pt{
+      margin-bottom: 29px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      font-size: 19px;
+      margin-left: 10px;
+    }
+
+    #single{
+    margin-left: -25px;
+    margin-bottom: 27px;
+    font-size: 18px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    #inc{
+    font-size: 17px;
+    margin-bottom: 37px;
+    margin-left: -13px;
+    color: gray;
+    }
+
+    #create{
+      border-top: -150px;
+    }
     </style>
   </head>
 <body>
   <script type="module" src="../static/scripts/header.js"></script>
 
   <my-header></my-header>
-  
     <section class="main2">
-        
-
-        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h2><a class="bread_crumb" href="/single/{{ patient.id }}">{{ patient.name }} /</a></h2><h3>Payments</h3>
-        <button id="action">IMPORT</button>     
-        <a href="/create_payment/{{ patient.id }}" id="edit"><button class="btn1">CREATE</button></a>
+        <h2><a class="bread_crumb" id="pt" href="/">Patients /</a></h2><h2><a class="bread_crumb" href="/single/{{ patient.id }}" id="single">{{ patient.name }} /</a></h2><h3 id="inc">Payments</h3>
     </section>
     <!--<h4>Prescription Records</h4>-->
     <table>

@@ -6,6 +6,77 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/static/styles/prescriptions.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            #pt{
+      margin-bottom: 45px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      font-size: 19px;
+      margin-left: 10px;
+    }
+    #single{
+    margin-left: -20px;
+    margin-bottom: 55px;
+    font-size: 18px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+   
+    #pres{
+    font-size: 17px;
+    margin-bottom: 55px;
+    margin-left: -10px;
+    color: gray;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    #crip{
+        font-size: 25px;
+    font-weight: 700px;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    #action{
+        margin-left: 80%;
+        margin-top: -150px;
+    }
+
+    .des{
+      border-radius: 2px;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      background-color: rgb(231, 254, 240);
+    }
+
+    #health{
+      margin-left: -5px;
+    }
+    #p_id{
+      margin-left: -5px;
+    }
+
+    .card{
+        height: 65%;
+    }
+
+    .popup-content{
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        background-color: rgb(241, 254, 246);
+        background: linear-gradient(45deg, rgb(241, 254, 246), white);
+    }
+
+    #dot{
+        border-left: 1px solid green;
+    }
+
+    #inv{
+    font-size: 25px;
+    font-weight: 700px;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+    </style>
         
 </head>
 
@@ -15,7 +86,7 @@
     <my-header></my-header>
 
     <section class="main2">
-        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><a href="http://127.0.0.1:5000/prescriptions/{{ patient.id }}"><h4 id="pres">Prescriptions</h4></a>
+        <h2><a class="bread_crumb" href="/" id="pt">Patients /</a></h2><h3><a class="bread_crumb" id="single" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><a  href="http://127.0.0.1:5000/prescriptions/{{ patient.id }}"><h4 id="pres">Prescriptions</h4></a>
         <button id="action">DISCARD</button>
     </section>
     <div class="line">
@@ -24,7 +95,7 @@
 
     <main class="main">
         <section class="card">
-            <h3>Prescriptions</h3>
+            <h3 id="inv">Prescriptions</h3>
 
             <section class="des">
                 <div class="left">
@@ -49,7 +120,7 @@
                 </div>
             </section>
 
-            <section class="main2">
+            <section class="main3">
                 <h2>Prescription Lines</h2>
                 <a id="btn3" href="#" target="_blank"><button class="btn2" id="addButton">Add an item</button></a>
 
@@ -101,7 +172,7 @@
                             </div>
                     </div>
                 </div>
-                <div id="cardPopup1" class="hidden card-popup">
+                <div id="cardPopup" class="hidden card-popup">
                     <div class="popup-content">
                         <h2 class="text-2xl mb-4">Edit: Prescription</h2>
 
@@ -125,10 +196,7 @@
                                     <p >{{ patient.name }}</p>
                                 </section>
                             </div>
-
-                        <hr class="section-divider">
-
-                        <div class="container">
+                        <div class="container" id="dot">
                             <h2>Dosage</h2>
                             <div class="section-wrapper1">
                                 <section class="section">
@@ -181,4 +249,12 @@
 <script src="/static/scripts/edit_prescriptions.js"></script>
 <script src="/static/scripts/prescriptions.js"></script>
 <script src="/static/scripts/generate_invoice.js"></script>
+<script>
+    document.addEventListener('click', function(event) {
+    var target = event.target;
+    if (!cardPopup.contains(target) && target !== addButton && target !== save) {
+    cardPopup.classList.add('hidden');
+    }
+    });
+</script>
 </html>

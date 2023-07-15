@@ -71,7 +71,54 @@
       a{
         text-decoration: none;
       }
-  
+
+      #pt{
+      margin-bottom: 10px;
+      font-size: 18px;
+      margin-left: 10px;
+    }
+    #single{
+    margin-left: -25px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    }
+    #inc{
+    font-size: 17px;
+    margin-bottom: 25px;
+    margin-left: -13px;
+    color: gray;
+    }
+
+    .btn1 {
+    padding: 8px 20px;
+    border: none;
+    background-color: hsl(120, 64%, 35%);
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 200;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+    margin-left: 50%;
+    margin-top: -45px;
+    font-size: 12px;
+    width: 100px;
+    
+}
+
+.btn1:hover {
+    background-color: hsl(180, 7%, 97%);
+    color: rgb(5, 121, 5);
+    border: 2px solid rgb(5, 121, 5);
+
+}
+
+#create{
+  display: inline-block;
+       margin-top: -30px;
+       margin-left: 80%;
+       color: white;
+       padding: 10px 10px;
+}  
     </style>
   </head>
 <body>
@@ -82,7 +129,7 @@
     <section class="main2">
         
 
-        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h2><a class="bread_crumb" href="/single/{{ patient.id }}">{{ patient.name }} /</a></h2><h3>Invoices</h3>    
+        <h2><a class="bread_crumb" id="pt" href="/">Patients /</a></h2><h2><a class="bread_crumb" id="single" href="/single/{{ patient.id }}">{{ patient.name }} /</a></h2><h3 id="inc">Invoices</h3>    
         <a id="create"><button class="btn1">CREATE</button></a>
     </section>
     <!--<h4>Prescription Records</h4>-->

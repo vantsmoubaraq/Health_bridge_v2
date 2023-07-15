@@ -4,7 +4,7 @@
         <title>Customer Invoices</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/styles/prescriptions.css" />
+        <link rel="stylesheet" href="../static/styles/invoice.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         
 </head>
@@ -15,7 +15,7 @@
     <my-header></my-header>
 
     <section class="main2">
-        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}">{{ patient.name }} /</a></h3><h4>Invoice</h4> 
+        <h2><a class="bread_crumb" id="pt" href="/">Patients /</a></h2><h3><a class="bread_crumb" id="single" href="http://127.0.0.1:5000/single/{{ patient.id }}">{{ patient.name }} /</a></h3><h4 id="inc">Invoice</h4>
         <a href="http://127.0.0.1:5000/invoice_service/{{ invoice.id }}" id="edit"><button class="btn1">ADD SERVICE</button></a>
     </section>
     <div class="line">
@@ -24,7 +24,7 @@
 
     <main class="main">
         <section class="card">
-            <h3>Invoice</h3>
+            <h3 id="inv">Invoice</h3>
 
             <section class="des">
                 <div class="left">
@@ -34,7 +34,7 @@
                 <div class="middle1">
 			{{ patient.name }}
 		    <br>
-            <p>Cash</p>
+            <p id="cash">Cash</p>
               
                 </div>
                 <div class="middle2">
@@ -44,11 +44,11 @@
                 </div>
                 <div class="right">
                     {{ user.name }}<br>
-                    {{ invoice.created_at}}<br>
+                    <span id="created">{{ invoice.created_at}}</span><br>
                     {{ invoice.id }}
             </section>
 
-            <section class="main2">
+            <section class="main3">
                 <h2>Invoice Lines</h2>
             <!--<h4>Prescription Records</h4>-->
             <table>
@@ -82,7 +82,7 @@
 
             <section>
                 <div class="totals">
-                    Total: {{ total_amount }} shs<br>
+                    <span id="amount">Total: {{ total_amount }} shs</span>
                     Amount Due:  {{ invoice.amount_due }} shs
                 </div>
             </section>

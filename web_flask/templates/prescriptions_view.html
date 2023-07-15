@@ -58,11 +58,18 @@
         cursor: pointer;
       }
 
-      #edit{
-       display: inline-block;
-       margin-top: 0px;
-       margin-left: 80%;
+      #create{
+       padding: 10px 10px;
       }
+
+      #edit{
+        display: inline-block;
+       margin-top: 0px;
+       margin-left: 0%;
+       color: white;
+       padding: 10px 10px;
+      }
+
 
       h3{
         margin-top: 0px;
@@ -85,6 +92,26 @@
       padding: 10px;
     }
   }
+
+    #pt{
+      margin-bottom: 10px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      font-size: 19px;
+      margin-left: 10px;
+    }
+    #single{
+    margin-left: -25px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    #inc{
+    font-size: 18px;
+    margin-bottom: 25px;
+    margin-left: -13px;
+    color: gray;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
   
     </style>
   </head>
@@ -96,8 +123,8 @@
     <section class="main2">
         
 
-      <h2><a class="bread_crumb" href="/">Patients /</a></h2><h2><a class="bread_crumb" href="/single/{{ patient.id }}">{{ patient.name }} /</a></h2><h3>Prescriptions</h3>     
-      <button class="btn1" id="create"><a href="/prescriptions_page/{{ patient.id }}" id="edit">CREATE</a></button>
+      <h2><a class="bread_crumb" href="/" id="pt">Patients /</a></h2><h2><a class="bread_crumb" id="single" href="/single/{{ patient.id }}">{{ patient.name }} /</a></h2><h3 id="inc">Prescriptions</h3>     
+      <a href="/prescriptions_page/{{ patient.id }}" id="edit"></a><button class="btn1" id="create">CREATE</button></a>
   </section>
   <table>
     <thead>
