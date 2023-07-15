@@ -25,3 +25,5 @@ data => {console.log(data);
 window.location.href = `/single/${id}`;}
 ).catch(error => console.error(error))
 });
+
+
