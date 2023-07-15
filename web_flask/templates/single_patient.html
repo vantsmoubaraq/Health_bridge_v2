@@ -6,6 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../static/styles/single_patient.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            #invoice{
+                margin-top: -40px;
+                margin-left: 90%;
+            }
+
+            #payment{
+                margin-top: 3px;
+            }
+        </style>
         
 </head>
 
@@ -44,15 +54,15 @@
                         <span>Prescriptions</span>
                     </a>
 
-                    <a class="payments" href="/all_payments/{{ patient.id }}">
+                    <a class="prescriptions" id="invoice" href="/invoices/{{ patient.id }}">
+                        <img class="img" id="burger" src="https://assets.mockflow.com/app/wireframepro/svg/default/menu.svg" alt="Image description">
+                        <span id="inv">Invoices</span>
+                    </a>
+
+                    <a class="payments" id="payment" href="/all_payments/{{ patient.id }}">
                         <img class="img" src="https://assets.mockflow.com/app/wireframepro/svg/default/down.svg" alt="Image description">
                         <span>Payments</span>
                     </a><br>
-
-                    <a class="prescriptions" href="/invoices/{{ patient.id }}">
-                        <img class="img" src="https://assets.mockflow.com/app/wireframepro/svg/default/menu.svg" alt="Image description">
-                        <span>Invoices</span>
-                    </a>
                 </section>
             </section>
             

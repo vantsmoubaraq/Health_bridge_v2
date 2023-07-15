@@ -5,6 +5,55 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/static/styles/prescriptions.css" />
+        <style>
+          #pt{
+      margin-bottom: 0px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      font-size: 19px;
+      margin-left: 10px;
+    }
+    #single{
+    margin-left: -25px;
+    margin-bottom: 7px;
+    font-size: 18px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    #pres{
+    font-size: 18px;
+    color: gray;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    #inc{
+      margin-top: -11px;
+      margin-left: -13px;
+      
+    }
+    #health{
+      margin-left: -5px;
+    }
+    #p_id{
+      margin-left: -5px;
+    }
+
+    .des{
+      border-radius: 2px;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      background-color: rgb(231, 254, 240);
+    }
+
+    .card{
+      border-radius: 5px;
+    }
+
+    #crip{
+      font-size: 25px;
+    font-weight: 700px;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+        </style>
         
         
 </head>
@@ -15,7 +64,7 @@
     <my-header></my-header>
 
     <section class="main2">
-        <h2><a class="bread_crumb" href="/">Patients /</a></h2><h3><a class="bread_crumb" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><h4><a href="http://127.0.0.1:5000/prescriptions/{{ patient.id }}" id="pres">Prescriptions</a></h4>
+        <h2><a class="bread_crumb" id="pt" href="/">Patients /</a></h2><h3><a class="bread_crumb" id="single" href="http://127.0.0.1:5000/single/{{ patient.id }}"> {{ patient.name }} /</a></h3><h4 id="inc"><a href="http://127.0.0.1:5000/prescriptions/{{ patient.id }}" id="pres">Prescriptions</a></h4>
         
         <a href="http://127.0.0.1:5000/prescriptions_edit/{{ prescription.id }}/{{ patient.id }}" id="edit"><button class="btn1">EDIT</button></a>
     </section>
@@ -25,7 +74,7 @@
 
     <main class="main">
         <section class="card">
-            <h3>Prescriptions</h3>
+            <h3 id="crip">Prescriptions</h3>
 
             <section class="des">
                 <div class="left">
@@ -35,7 +84,7 @@
                 <div class="middle1">
 			 {{ patient.name }}
 		    <br>
-            <p>HealthBridge</p>
+            <p id="health">HealthBridge</p>
               
                 </div>
                 <div class="middle2">

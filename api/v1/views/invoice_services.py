@@ -4,6 +4,7 @@ from flask import request, jsonify, abort
 from models import storage
 from models.invoice_services import Invoiced_services
 from api.v1.views import ui
+from models.invoices import Invoice
 
 
 @ui.route("/invoice_services", methods=["POST"])
@@ -49,3 +50,7 @@ def invoice_services(id=None):
         storage.delete(service_invoiced)
         return jsonify({})
 
+@ui.route("/create_invoice", methods=["POST"])
+def invoice_created():
+    """adds new service and new invoice"""
+    invoice = Invoice()
