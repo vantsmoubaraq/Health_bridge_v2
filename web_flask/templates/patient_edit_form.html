@@ -3,7 +3,6 @@
 <head>
     <title>Patient Registration Form</title>
     <link rel="stylesheet" href="../static/styles/patient_form.css" />
-	<link rel="stylesheet" href="../static/styles/single_patient.css" /> 
     
 </head>
 <body>
@@ -37,13 +36,14 @@
 		</fieldset>
 		<fieldset>
 			<label for="hospitalizations">Clinical Notes:</label>
-            <textarea id="notes" name="clinical_notes"  required>{{ patient.clinical_notes }}</textarea><br><br>
+            <textarea id="notes" name="clinical_notes"  required >{{ patient.clinical_notes }}</textarea>
 		</fieldset>
 		
 		<button type="submit" id="btn" value="Submit">Submit</button>
 	</form>
 </body>
 <script  type="text/javascript" src="../static/scripts/edit_patient.js">
+	
 	/*const submitButton = document.getElementById('btn');
 	submitButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -83,4 +83,5 @@
 }*/
 
 </script>
+
 </html>

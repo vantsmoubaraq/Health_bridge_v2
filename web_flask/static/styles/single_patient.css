@@ -176,14 +176,12 @@ h6 {
 .card1 {
     height: auto;
     width: 95%;
-    align-items: center;
     margin-top: 1%;
     background-color: rgb(255, 254, 254);
     margin-left: 2%;
     border-top: 2px solid rgb(230, 227, 227);
     font-family: Helvetica, sans-serif;
     color: #7a7878;
-    
     
 }
 
@@ -385,9 +383,12 @@ h6 {
 
 }
 
-p {
-    margin-bottom: 20px;
-    margin-top: 20px;
+.notes {
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    white-space: pre-wrap;
     
 }
 

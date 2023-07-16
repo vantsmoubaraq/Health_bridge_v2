@@ -89,9 +89,9 @@
             <section>
                 <h6>Clinical Notes</h6>
                 <div class="card1">
-                    <p>
-                        {{ patient.clinical_notes }}
-                    </p>
+                    <div class="notes" style="margin: 0; padding: 0;">
+                        {{ patient.clinical_notes|trim }}
+                    </div>
                 </div>
             </section>
         </section>
