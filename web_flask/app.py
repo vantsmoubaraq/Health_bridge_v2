@@ -695,6 +695,10 @@ def chat():
     user = current_user
     return render_template("chatAI.html", user=user)
 
+@app.route("/landing", strict_slashes=False)
+def landing_page():
+    return render_template("landing_page.html")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
