@@ -5,6 +5,12 @@ class MyHeader extends HTMLElement {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/styles/patients_pharmacy.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../images/Health Bridge lower 02-01.png"
+        />
         
       </head>
   
